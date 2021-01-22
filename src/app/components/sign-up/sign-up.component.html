@@ -1,0 +1,75 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="signUp(f)">
+    <div class="mb-3">
+      <label class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          #email="ngModel"
+          ngModel
+          required>
+      <div class="form-text">Bad credentials!</div>
+    </div>
+    <br>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        #password="ngModel"
+        ngModel
+        required>
+    </div>
+    <br>
+    <div class="mb-3">
+      <label class="form-label">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nome"
+          #nome="ngModel"
+          ngModel
+          required>
+    </div>
+    <br>
+    <div class="mb-3">
+      <label class="form-label">Cognome</label>
+        <input
+          type="text"
+          class="form-control"
+          name="cognome"
+          #cognome="ngModel"
+          ngModel
+          required>
+    </div>
+    <br>
+    <div class="mb-3">
+      <label class="form-label">Data di nascita</label>
+        <input
+          type="date"
+          class="form-control"
+          name="ddn"
+          #ddn="ngModel"
+          ngModel
+          required>
+    </div>
+    <br>
+    <div class="mb-3">
+        <label for="country">Country:</label>
+        <select name="country" #country="ngModel" ngModel required>
+          <option value="Italy">Italy</option>
+          <option value="France">France</option>
+          <option value="Germany">Germany</option>
+          <option value="Spain">Spain</option>
+          <option value="England">England</option>
+        </select>
+    </div>
+    <br>
+    <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="f.invalid">Submit</button>
+  </form>
+</div>

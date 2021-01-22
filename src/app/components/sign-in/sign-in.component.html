@@ -1,0 +1,31 @@
+<div class="container form-container" >
+    <form #f="ngForm" (ngSubmit)="signIn(f)">
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              #email="ngModel"
+              ngModel
+              required>
+          <div class="form-text">Bad credentials!</div>
+        </div>
+        <br>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            #password="ngModel"
+            ngModel
+            required>
+        </div>
+        <br>
+        <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="f.invalid">Submit</button>
+      </form>
+</div>
