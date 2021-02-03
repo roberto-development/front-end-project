@@ -1,0 +1,54 @@
+Using observable to pass values :
+Observables provide support for passing messages between parts of your application.
+They are used frequently in Angular and are the recommended technique for:
+- event handling,
+- asynchronous programming,
+- handling multiple values.
+
+>> design pattern in which an object, called the subject,
+maintains a list of its dependents, called observers, and notifies them automatically
+of state changes.
+
+Observables are declarative—that is, you define a function for publishing values, but it is not executed until a consumer subscribes to it.
+The subscribed consumer then receives notifications until the function completes, or until they unsubscribe.
+
+*Transforming Data using Pipes*
+Use pipes to transform strings, currency amounts, dates, and other data for display.
+Pipes are simple functions you can use in template expressions to accept an input value and return a transformed value.
+Pipes are useful because you can use them throughout your application, while only declaring each pipe once.
+
+Map operator applies a given project function to each value emitted by the source Observable and emits the resulting values as an Observable.
+
+Filter operator filter items from the source observable based on some condition and returns the filtered value as a new observable
+
+Pipe as an instance method
+The pipe as an instance method is used as below.
+We the operators op1, op2 etc are passed as the argument to pipe method. The output of op1 method becomes input of the op2 operator and so forth.
+
+obs.pipe(
+  op1(),
+  op2(),
+  op3(),
+  op3(),
+)
+
+>>> https://jasonwatmore.com/post/2019/02/07/angular-7-communicating-between-components-with-observable-subject
+Observable.subscribe()
+The observable subscribe method is used by angular components to subscribe to messages that are sent to an observable.
+
+Subject.next()
+The subject next method is used to send messages to an observable which are then sent to all angular components that are subscribers (a.k.a. observers) of that observable.
+
+Convert observable to promise.
+⚠ toPromise is not a pipable operator, as it does not return an observable.
+
+sessionStorage vs localStorage
+
+La proprietà sessionStorage permette di accedere all'oggetto di sessione Storage.
+sessionStorage è simile a  Window.localStorage, l'unica differenza è che mentre i dati salvati in localStorage non hanno scadenza,
+i dati in sessionStorage vengono ripuliti ogniqualvolta la sessione della pagina termina.
+La sessione della pagina dura fino a quando il browser è aperto e sopravvive alla ricarica della pagina e al ripristino.
+L'apertura di una pagina in un nuovo tab o in una nuova finestra implica l'apertura di una nuova sessione,
+il che differisce da come funzionano i cookie di sessione.
+
+Va ricordato che i dati memorizzati nel sessionStorage o localStorage sono specifici per il protocollo della pagina.

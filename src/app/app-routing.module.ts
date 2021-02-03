@@ -1,11 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 const routes: Routes = [
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent }
+
+  // { path: 'auth', component:AuthenticationComponent },
+  // { path: 'sign-in', component: SignInComponent },
+  // { path: 'sign-up', component: SignUpComponent },
+  // { path: 'reset-password', component: ResetPasswordComponent },
+  // { path: 'home-page', component: HomepageComponent },
+  // { path: 'user-list', component: UserListComponent },
+  // {path: '', redirectTo: 'auth'},
+
+
+  {
+    path: '', loadChildren: () =>
+  import('./auth/auth.module').then(
+    (m) => m.AuthModule
+    )
+  },
+
+  {
+    path: 'main', loadChildren: () =>
+    import('./main/main.module').then(
+      (m) => m.MainModule
+    )
+  }
+
 ];
 
 @NgModule({

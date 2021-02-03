@@ -1,15 +1,17 @@
 <div class="container form-container" >
-    <form #f="ngForm" (ngSubmit)="signIn(f)">
+    <form #f="ngForm" (ngSubmit)="signIn(f)" style="width:800px; margin-right:auto; margin-left:auto; rgb(243, 242, 242);">
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
         <div class="mb-3">
           <label class="form-label">Email address</label>
             <input
               type="email"
               class="form-control"
               name="email"
+              placeholder="Email address"
               #email="ngModel"
               ngModel
               required>
-          <div class="form-text">Bad credentials!</div>
+          <div class="form-text" [hidden]="!errore">Bad credentials!</div>
         </div>
         <br>
         <div class="mb-3">
@@ -18,9 +20,15 @@
             type="password"
             class="form-control"
             name="password"
+            placeholder="Password"
             #password="ngModel"
             ngModel
             required>
+        </div>
+        <br>
+        <div class="btn-link">
+          <!-- <div class="form-group form-check"></div> -->
+        <a routerLink="/reset-password">Forgot password?</a>
         </div>
         <br>
         <button
