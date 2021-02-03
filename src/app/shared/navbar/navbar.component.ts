@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Account } from 'src/app/models/Account.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,10 @@ import { Account } from 'src/app/models/Account.model';
 export class NavbarComponent implements OnInit {
 
   
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
 
@@ -18,5 +22,13 @@ export class NavbarComponent implements OnInit {
 
   goToProfile() {
     this.router.navigate(['/profile']);
+  }
+
+  logout()
+  {
+    // Remove the token from the localStorage.
+
+    this.userService.logout();
+
   }
 }

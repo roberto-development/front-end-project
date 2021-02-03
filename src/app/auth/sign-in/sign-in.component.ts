@@ -51,6 +51,8 @@ this.account = new Account();
     // this.userService.login(this.account).subscribe(result => this.gotoUserList());
   return  this.userService.login(this.account).subscribe(
       result =>  {
+        localStorage.setItem('account', JSON.stringify(result));
+        // localStorage.setItem('user', JSON.stringify(result.user));
       console.log(result);
       
       this.goToHomepage();

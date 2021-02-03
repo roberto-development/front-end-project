@@ -5,6 +5,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
+import { WrapperComponent } from './wrapper/wrapper.component';
 // import { HomepageComponent } from '../components/home-page/homepage.component';
 
 
@@ -12,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     HomeComponent,
     ProfileComponent,
+    WrapperComponent,
     ],
   imports: [
     CommonModule,

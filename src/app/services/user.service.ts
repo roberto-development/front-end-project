@@ -7,6 +7,7 @@ import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { kStringMaxLength } from "buffer";
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +48,10 @@ createAccount(account: Account) {
 }
 
 public login(account: Account) {
+  // localStorage.setItem('account', JSON.stringify(account));
+  // localStorage.setItem('user', JSON.stringify(account.user));
+  console.log();
+    
   return this.http.post<Account>(this.accountUrl + `/login`, account);
 
 }
