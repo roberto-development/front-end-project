@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileComponent implements OnInit {
   user: User;
-  
+  loadProfile: boolean;
   constructor(private userService: UserService , private autheService : AuthenticationService) { }
 
   ngOnInit() {
@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
     // stored as User because from BE returns object User
     // this.user = accountData;
     this.user = this.autheService.loggedInUser
+    // this.user = this.autheService.signedUser
     console.log(this.user);
     
   }

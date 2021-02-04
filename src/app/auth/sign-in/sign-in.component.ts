@@ -41,6 +41,7 @@ export class SignInComponent {
         localStorage.setItem('accountId', JSON.stringify(result.id));
         this.router.navigate(['/profile'])
         console.log("arrived");
+        this.authenticationService.checkLogin = true;
         
         
       },

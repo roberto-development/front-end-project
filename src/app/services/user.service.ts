@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable} from "rxjs";
-import { User } from "../models/User.model";
 import { Account } from "../models/Account.model";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
@@ -13,6 +12,7 @@ import { Router } from "@angular/router";
 
 export class UserService {
   passwordResetter: string;
+  resetPasswordAccount: Account = new Account();
 
   constructor(
     private http: HttpClient, 
@@ -20,9 +20,9 @@ export class UserService {
     ) {}
 
 
-createAccount(account: Account) {
-  return this.http.post<User>(environment.rootUrl + `/sign-up`, account);
-}
+// createAccount(account: Account) {
+//   return this.http.post<User>(environment.rootUrl + `/sign-up`, account);
+// }
 
 // public login(account: Account) {
 //   return this.http.post<Account>(environment.rootUrl + `/login`, account);
@@ -41,7 +41,7 @@ logout() {
 
 resetPassword(account: Account) {
   return this.http.post<Account>(
-    environment.rootUrl + '/reset-password',
+    environment.rootUrl + '/update',
     account
   );
 }

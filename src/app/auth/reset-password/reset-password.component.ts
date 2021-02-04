@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Account } from 'src/app/models/Account.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,25 +15,41 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(private userService: UserService, private route: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.incorrectConfirmedPass = false;
   }
 
   resetPassword(f: NgForm) {
 
-    // const newPwd = f.value.newPassword;
-    // const newPassConfirmation = f.value.newConfirmedPass;
+    let emailAccount = f.value.accountEmail;
+    console.log(emailAccount);
+    
+    let newPwd = f.value.newPassword;
+    let newPassConfirmation = f.value.newConfirmedPass;
 
-    // if (newPwd !== newPassConfirmation) {
-    //   this.incorrectConfirmedPass = true;
-    //   console.log(`Incorrect password !!`);
+    if (newPwd !== newPassConfirmation) {
+      this.incorrectConfirmedPass = true;
+      console.log(`Incorrect password !!`);
 
-    // } else if (newPassConfirmation === newPassConfirmation) {
+    } else if (newPassConfirmation === newPassConfirmation) {
 
-    //   const newPassword = newPwd.toString();
-    //   this.userService.passwordResetter.password = newPassword;
-    //   this.userService
-    //     .resetPassword(this.userService.passwordResetter)
+      const newPassword = newPwd.toString();
+      if(this.userService.resetPasswordAccount) {
+        
+      }
+      this.userService.resetPasswordAccount.email = emailAccount;
+      this.userService.resetPasswordAccount.newPassword = newPassword;
+      this.userService
+        .resetPassword(this.userService.resetPasswordAccount)
+        .subscribe(
+          (result: Account) => {
+            if (result.password) {
+              this.route.navigate(['/sign-in']);
+            } else {
+              this.error = 'probably a server problem, try later ';
+            }
+          })
+        }
     //     .toPromise()
     //     .then((result) => {
     //       if (result.password) {

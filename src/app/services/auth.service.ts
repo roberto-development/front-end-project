@@ -11,7 +11,9 @@ import { User } from '../models/User.model';
 })
 export class AuthenticationService {
 
+  checkLogin : boolean = false;
   loggedInUser : User
+  signedUser : User
   // login   isLoggedIn  Logout 
   // LoggedInUser 
 
@@ -21,5 +23,7 @@ export class AuthenticationService {
     return this.http.post<User>(environment.rootUrl + `/login`, account);
   }
 
-
+  public createAccount(account: Account) : Observable<User> {
+    return this.http.post<User>(environment.rootUrl + `/register`, account);
+  }
 }
