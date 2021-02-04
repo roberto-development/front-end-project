@@ -20,31 +20,31 @@ export class ResetPasswordComponent implements OnInit {
 
   resetPassword(f: NgForm) {
 
-    const newPwd = f.value.newPassword;
-    const newPassConfirmation = f.value.newConfirmedPass;
+    // const newPwd = f.value.newPassword;
+    // const newPassConfirmation = f.value.newConfirmedPass;
 
-    if (newPwd !== newPassConfirmation) {
-      this.incorrectConfirmedPass = true;
-      console.log(`Incorrect password !!`);
+    // if (newPwd !== newPassConfirmation) {
+    //   this.incorrectConfirmedPass = true;
+    //   console.log(`Incorrect password !!`);
 
-    } else if (newPassConfirmation === newPassConfirmation) {
+    // } else if (newPassConfirmation === newPassConfirmation) {
 
-      const newPassword = newPwd.toString();
-      this.userService.passwordResetter.password = newPassword;
-      this.userService
-        .resetPassword(this.userService.passwordResetter)
-        .toPromise()
-        .then((result) => {
-          if (result.password) {
-            this.route.navigate(['/app/sign-in']);
-          } else {
-            this.error = 'probably a server problem, try later ';
-          }
-        })
-        .catch((err) => {
-          this.error = err.message;
-        });
-    }
+    //   const newPassword = newPwd.toString();
+    //   this.userService.passwordResetter.password = newPassword;
+    //   this.userService
+    //     .resetPassword(this.userService.passwordResetter)
+    //     .toPromise()
+    //     .then((result) => {
+    //       if (result.password) {
+    //         this.route.navigate(['/app/sign-in']);
+    //       } else {
+    //         this.error = 'probably a server problem, try later ';
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       this.error = err.message;
+    //     });
+    // }
   }
 
 

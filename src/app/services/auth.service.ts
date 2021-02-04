@@ -1,40 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Account } from '../models/Account.model';
+import { User } from '../models/User.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
-  private loggedAccount= new BehaviorSubject<Account>(<Account>{});
-get isLoggedIn() {
-  return this.loggedIn.asObservable(); // {2}
-}
-  // isLoggedIn: boolean = false;
+
+  loggedInUser : User
+  // login   isLoggedIn  Logout 
+  // LoggedInUser 
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(account: Account) {
-    const newAccount = new Account();
-    newAccount.email = account.email;
-    newAccount.password = account.password;
-    return this.http.post<Account>(environment.rootUrl + `/login`, account, {
-      observe: 'response'
-    }
-    );
+  public login(account: Account) : Observable<User> {
+    return this.http.post<User>(environment.rootUrl + `/login`, account);
   }
 
 
-  // logout()
-  // {
-  //   // Remove the token from the localStorage.
-  //   // localStorage.removeItem('token');
-
-  //   this.router.navigate(['/auth']);
-
-  // }
 }
