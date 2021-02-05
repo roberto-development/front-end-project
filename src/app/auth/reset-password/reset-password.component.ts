@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Account } from 'src/app/models/Account.model';
+import { AuthenticationService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { AuthenticationComponent } from '../authentication/authentication.component';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,7 +15,7 @@ export class ResetPasswordComponent implements OnInit {
   incorrectConfirmedPass: boolean;
   error: string;
 
-  constructor(private userService: UserService, private route: Router) { }
+  constructor(private userService: UserService, private route: Router, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.incorrectConfirmedPass = false;
@@ -23,7 +25,7 @@ export class ResetPasswordComponent implements OnInit {
 
     let emailAccount = f.value.accountEmail;
     console.log(emailAccount);
-    
+    let oldPwd = f.value.oldPassword;
     let newPwd = f.value.newPassword;
     let newPassConfirmation = f.value.newConfirmedPass;
 
@@ -34,13 +36,11 @@ export class ResetPasswordComponent implements OnInit {
     } else if (newPassConfirmation === newPassConfirmation) {
 
       const newPassword = newPwd.toString();
-      if(this.userService.resetPasswordAccount) {
-        
-      }
-      this.userService.resetPasswordAccount.email = emailAccount;
-      this.userService.resetPasswordAccount.newPassword = newPassword;
-      this.userService
-        .resetPassword(this.userService.resetPasswordAccount)
+      this.authenticationService.resetPasswordAccount.email = emailAccount;
+      this.authenticationService.resetPasswordAccount.password= oldPwd;
+      this.authenticationService.resetPasswordAccount.newPassword = newPassword;
+      this.authenticationService
+        .resetPassword(this.authenticationService.resetPasswordAccount)
         .subscribe(
           (result: Account) => {
             if (result.password) {

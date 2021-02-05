@@ -14,16 +14,35 @@ export class AuthenticationService {
   checkLogin : boolean = false;
   loggedInUser : User
   signedUser : User
+  passwordResetter: string;
+  resetPasswordAccount: Account = new Account;
   // login   isLoggedIn  Logout 
   // LoggedInUser 
 
   constructor(private http: HttpClient, private router: Router) {}
 
   public login(account: Account) : Observable<User> {
-    return this.http.post<User>(environment.rootUrl + `/login`, account);
+    return this.http.post<User>(
+      environment.rootUrl + `/login`,
+       account);
   }
 
   public createAccount(account: Account) : Observable<User> {
-    return this.http.post<User>(environment.rootUrl + `/register`, account);
+    return this.http.post<User>(
+      environment.rootUrl + `/register`, 
+      account);
+  }
+
+  resetPassword(account: Account): Observable<Account> {
+    return this.http.put<Account>(
+      environment.rootUrl + '/update',
+      account
+    );
+  }
+
+  public updateUserDetails(account: Account) : Observable<User> {
+    return this.http.put<User>(
+      environment.rootUrl + '/updateUser',
+     account)
   }
 }

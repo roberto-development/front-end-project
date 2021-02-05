@@ -6,6 +6,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UpdateUserDetailsComponent } from './update-user-details/update-user-details.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -13,11 +15,13 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AuthenticationComponent,
     SignInComponent,
     SignUpComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    UpdateUserDetailsComponent
   ],
   imports: [
     AuthRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class AuthModule { }

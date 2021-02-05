@@ -11,8 +11,9 @@ import { Router } from "@angular/router";
 
 
 export class UserService {
-  passwordResetter: string;
-  resetPasswordAccount: Account = new Account();
+  // passwordResetter: string;
+  // resetPasswordAccount: Account = new Account();
+  
 
   constructor(
     private http: HttpClient, 
@@ -39,12 +40,12 @@ logout() {
 
 }
 
-resetPassword(account: Account) {
-  return this.http.post<Account>(
-    environment.rootUrl + '/update',
-    account
-  );
-}
+// resetPassword(account: Account) {
+//   return this.http.post<Account>(
+//     environment.rootUrl + '/update',
+//     account
+//   );
+// }
 
 
 // createAccount , getAccount , updateAccount 

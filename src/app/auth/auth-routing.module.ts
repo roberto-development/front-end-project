@@ -5,13 +5,15 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UpdateUserDetailsComponent } from './update-user-details/update-user-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'auth', component: AuthenticationComponent},
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'reset-password', component: ResetPasswordComponent }
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'update-user-details', component: UpdateUserDetailsComponent }
 ];
 
 @NgModule({
