@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -22,6 +23,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) {}
 
   public login(account: Account) : Observable<User> {
+
     return this.http.post<User>(
       environment.rootUrl + `/login`,
        account);
@@ -38,6 +40,12 @@ export class AuthenticationService {
       environment.rootUrl + '/update',
       account
     );
+  }
+
+  public updateUser(user: User) : Observable<User> {
+    return this.http.put<User>(
+      environment.rootUrl + '/userUpdate',
+      user);
   }
 
   public updateUserDetails(account: Account) : Observable<User> {
