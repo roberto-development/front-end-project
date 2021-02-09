@@ -12,6 +12,8 @@ import { User } from '../models/User.model';
 })
 export class AuthenticationService {
 
+  // user = new BehaviourSubject<User>(null);
+  // bev subj. helps us to ensure that we can get access to the user even if in this part of the app 
   checkLogin : boolean = false;
   loggedInUser : User = null 
 

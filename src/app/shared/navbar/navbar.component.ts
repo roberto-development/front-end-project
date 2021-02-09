@@ -24,11 +24,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
 
-  logout()
-  {
-    // Remove the token from the localStorage.
-
+  logout() {
     this.userService.logout();
-
   }
 }
