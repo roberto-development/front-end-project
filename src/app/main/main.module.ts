@@ -6,7 +6,9 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
 import { WrapperComponent } from './wrapper/wrapper.component';
-// import { HomepageComponent } from '../components/home-page/homepage.component';
+import { UpdateUserDetailsComponent } from './update-user-details/update-user-details.component';
+import { FormsModule } from '@angular/forms';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 @NgModule({
@@ -14,11 +16,16 @@ import { WrapperComponent } from './wrapper/wrapper.component';
     HomeComponent,
     ProfileComponent,
     WrapperComponent,
+    UpdateUserDetailsComponent
     ],
   imports: [
     CommonModule,
     MainRoutingModule,
-    SharedModule
+    FormsModule,
+    SharedModule,
+  ],
+  providers: [
+    AuthGuard
   ]
 })
 export class MainModule {}

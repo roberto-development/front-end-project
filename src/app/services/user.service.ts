@@ -4,50 +4,29 @@ import { Observable} from "rxjs";
 import { Account } from "../models/Account.model";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
+import { AuthenticationService } from "./auth.service";
 
 @Injectable({
   providedIn: 'root',
 })
 
-
 export class UserService {
-  // passwordResetter: string;
-  // resetPasswordAccount: Account = new Account();
-  
 
   constructor(
+    private authService: AuthenticationService,
     private http: HttpClient, 
     private router: Router
     ) {}
 
 
-// createAccount(account: Account) {
-//   return this.http.post<User>(environment.rootUrl + `/sign-up`, account);
-// }
-
-// public login(account: Account) {
-//   return this.http.post<Account>(environment.rootUrl + `/login`, account);
-// }
-
 public findAll(): Observable<Account[]> {
   return this.http.get<Account[]>(environment.rootUrl);
-}
-
+  }
 
 logout() {
-  localStorage.removeItem('token');
+  localStorage.removeItem('account');
+  this.authService.loggedInUser = null;
   this.router.navigate(['/auth']);
-
-}
-
-// resetPassword(account: Account) {
-//   return this.http.post<Account>(
-//     environment.rootUrl + '/update',
-//     account
-//   );
-// }
-
-
-// createAccount , getAccount , updateAccount 
+  }
 
 }

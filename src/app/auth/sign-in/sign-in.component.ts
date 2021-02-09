@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Account } from 'src/app/models/Account.model';
 import { User } from 'src/app/models/User.model';
 import { AuthenticationService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,8 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class SignInComponent {
 
   errore: boolean = false;
-
-
+  errorMessage;
 
   constructor(
     private router: Router,
@@ -37,17 +35,16 @@ export class SignInComponent {
      this.authenticationService.login(signedInAccount)
      .subscribe(
       (result : User) =>  {
+        localStorage.setItem('account', JSON.stringify(result.id));
         this.authenticationService.loggedInUser = result
-        localStorage.setItem('accountId', JSON.stringify(result.id));
+        this.authenticationService.checkLogin = true;
         this.router.navigate(['/profile'])
         console.log("arrived");
-        this.authenticationService.checkLogin = true;
-        
-        
       },
       error => {
       error.message;
       console.log(error);
+      this.errorMessage = 'An error occurred!';
       this.errore = true;
        }
     );

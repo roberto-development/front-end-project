@@ -13,17 +13,14 @@ import { User } from '../models/User.model';
 export class AuthenticationService {
 
   checkLogin : boolean = false;
-  loggedInUser : User
-  signedUser : User
+  loggedInUser : User = null 
+
   passwordResetter: string;
   resetPasswordAccount: Account = new Account;
-  // login   isLoggedIn  Logout 
-  // LoggedInUser 
 
   constructor(private http: HttpClient, private router: Router) {}
 
   public login(account: Account) : Observable<User> {
-
     return this.http.post<User>(
       environment.rootUrl + `/login`,
        account);
@@ -32,7 +29,7 @@ export class AuthenticationService {
   public createAccount(account: Account) : Observable<User> {
     return this.http.post<User>(
       environment.rootUrl + `/register`, 
-      account);
+      account)
   }
 
   resetPassword(account: Account): Observable<Account> {
@@ -53,4 +50,9 @@ export class AuthenticationService {
       environment.rootUrl + '/updateUser',
      account)
   }
+
+  isLogged () : boolean {
+    return !!localStorage.getItem('account')
+  }
+    
 }

@@ -59,7 +59,7 @@ export class SignUpComponent implements OnInit {
       (result : User) => {
       console.log(result);
      this.authService.loggedInUser = result
-     localStorage.setItem('account', JSON.stringify(result));
+    //  localStorage.setItem('account', JSON.stringify(result));
      console.log(result)
     //  localStorage.setItem('user', JSON.stringify(newAccount.user))
      this.router.navigate(['/sign-in']) 

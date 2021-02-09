@@ -6,7 +6,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { UpdateUserDetailsComponent } from './update-user-details/update-user-details.component';
 import { SharedModule } from '../shared/shared.module';
 
 
@@ -16,7 +15,6 @@ import { SharedModule } from '../shared/shared.module';
     SignInComponent,
     SignUpComponent,
     ResetPasswordComponent,
-    UpdateUserDetailsComponent
   ],
   imports: [
     AuthRoutingModule,

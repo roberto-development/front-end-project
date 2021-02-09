@@ -12,14 +12,11 @@ import { UserService } from 'src/app/services/user.service';
 export class ProfileComponent implements OnInit {
   user: User;
   loadProfile: boolean;
-  constructor(private userService: UserService , private autheService : AuthenticationService) { }
+  constructor(private userService: UserService , private authService : AuthenticationService) { }
 
   ngOnInit() {
-    // this.user = JSON.parse(localStorage.getItem('account'));
-    // stored as User because from BE returns object User
-    // this.user = accountData;
-    this.user = this.autheService.loggedInUser
-    // this.user = this.autheService.signedUser
+    this.user = this.authService.loggedInUser
+    console.log(this.user);
     console.log(this.user);
     
   }
@@ -27,10 +24,10 @@ export class ProfileComponent implements OnInit {
 
   logout()
   {
-    // Remove the token from the localStorage.
 
     this.userService.logout();
 
   }
+
 
 }
