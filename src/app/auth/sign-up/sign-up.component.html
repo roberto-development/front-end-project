@@ -10,7 +10,8 @@
           name="email"
           #email="ngModel"
           ngModel
-          required>
+          required
+          email>
           <div class="form-text" [hidden]="!errore">Bad credentials!</div>
     </div>
     <br>
@@ -22,7 +23,8 @@
         name="password"
         #password="ngModel"
         ngModel
-        required>
+        required
+        password>
     </div>
     <br>
     <div class="mb-3">
@@ -68,6 +70,7 @@
           <option value="England">England</option>
         </select>
     </div>
+    
     <br>
     <button
     type="submit"

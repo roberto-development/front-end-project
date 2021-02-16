@@ -22,6 +22,8 @@ export class SignUpComponent implements OnInit {
     'England'
   ];
 
+  selectedFile: File;
+
   constructor(
     private authService: AuthenticationService,
     private router: Router) { }
@@ -49,6 +51,7 @@ export class SignUpComponent implements OnInit {
     newUser.cognome = cognome;
     newUser.dataDiNascita = ddn;
     newUser.country = country;
+//  newUser.image = imageUpload;
 
     newAccount.userDTO = newUser;
 
@@ -68,9 +71,22 @@ export class SignUpComponent implements OnInit {
       console.log(error);
       this.errore = true;
       
-    }
-    )
+    })
   };
+
+  // onFileChanged(event) {
+  //   this.selectedFile = event.target.files[0];
+  // }
+
+  // onUpload() {
+// let uploadData = new FormData();
+// uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+
+    // this.authService.uploadPhoto(this.selectedFile);
+  // }
+
+  
+
   }
   
 

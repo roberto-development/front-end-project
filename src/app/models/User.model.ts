@@ -8,7 +8,7 @@ export class User extends Object {
     newDataDiNascita: string;
     country: string;
     newCountry: string;
-    // image: string;
+    image: any;
 }
 
 /*

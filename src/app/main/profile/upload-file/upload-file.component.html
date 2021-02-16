@@ -1,0 +1,40 @@
+<p>upload-file works!</p>
+<h3>Upload File</h3>
+
+<form #f="ngForm" (ngSubmit)="onFormSubmit(f)">
+  <div class="row">
+    <div class="col-sm-12">
+      <div>
+        <h6 class="head-title margin-top-8"><span>UPLOAD</span></h6>
+      </div>
+    </div>
+
+    <div class="col-sm-6 text-center">
+      <div class="custom-file">
+        <input
+          type="file"
+          class="custom-file-input"
+          id="customFile"
+          name="myfile"
+          (change)="onFileSelect($event)"
+          #UploadFileInput
+        />
+        <label class="custom-file-label" for="customFile">{{
+          fileInputLabel || "Choose File"
+        }}</label>
+      </div>
+    </div>
+    <!-- <div class="col-sm-6 text-center">
+            <input type="file" (change)="onFileChanged($event)">
+            <button class="btn btn-primary" type="submit">Upload</button>
+        </div> -->
+    <input
+      style="display: none"
+      type="file"
+      (change)="onFileChanged($event)"
+      #fileInput
+    />
+    <button (click)="fileInput.click()">Select File</button>
+    <!-- <button (click)="onUpload()">Upload!</button> -->
+  </div>
+</form>

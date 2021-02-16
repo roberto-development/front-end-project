@@ -9,6 +9,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
 import { UpdateUserDetailsComponent } from './update-user-details/update-user-details.component';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from '../guards/auth.guard';
+// import { UploadFileComponent } from './profile/upload-file/upload-file.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AuthGuard } from '../guards/auth.guard';
     HomeComponent,
     ProfileComponent,
     WrapperComponent,
-    UpdateUserDetailsComponent
+    UpdateUserDetailsComponent,
+    // UploadFileComponent
     ],
   imports: [
     CommonModule,

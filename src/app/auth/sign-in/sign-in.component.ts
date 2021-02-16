@@ -11,6 +11,7 @@ import { AuthenticationService } from 'src/app/services/auth.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
+  isLoading = false;
 
   errore: boolean = false;
   errorMessage;
@@ -29,8 +30,9 @@ export class SignInComponent {
     signedInAccount.email = email
     signedInAccount.password = password
 
+    // this.setData()
     console.log(signedInAccount);
-    
+    this.isLoading = true;
 
      this.authenticationService.login(signedInAccount)
      .subscribe(
@@ -40,16 +42,25 @@ export class SignInComponent {
         this.authenticationService.checkLogin = true;
         this.router.navigate(['/profile'])
         console.log("arrived");
+        this.isLoading = false;
       },
       error => {
       error.message;
       console.log(error);
       this.errorMessage = 'An error occurred!';
       this.errore = true;
+      this.isLoading = false;
        }
     );
 
 }
+
+// setData(email: string, password: string) {
+//   let signedInAccount = new Account();
+//     signedInAccount.email = email
+//     signedInAccount.password = password
+// }
+
  
 }
 
