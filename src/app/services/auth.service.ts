@@ -17,7 +17,7 @@ export class AuthenticationService {
   // user = new BehaviourSubject<User>(null);
   // bev subj. helps us to ensure that we can get access to the user even if in this part of the app 
   checkLogin : boolean = false;
-  loggedInUser : User = null 
+  loggedInUser : User = null; 
 
   passwordResetter: string;
   resetPasswordAccount: Account = new Account;
@@ -31,8 +31,6 @@ export class AuthenticationService {
   }
 
   public createAccount(account: Account) : Observable<User> {
-    let imageToSend = account.userDTO.image;
-    this.uploadPhoto(imageToSend);
     return this.http.post<User>(
       environment.rootUrl + `/register`, 
       account)
@@ -68,13 +66,10 @@ export class AuthenticationService {
       reportProgress:true,
       observe: 'events'
     })
-    .subscribe(event => {
-      console.log(event);
-    })
   }
 
   public getProfilePic(userId: User) : Observable<any> {
-    return this.http.post(environment.rootUrl + '/getImage', userId,  {responseType: 'text'});
+    return this.http.post(environment.rootUrl + '/userImage', userId,  {responseType: 'text'});
     
   }
     

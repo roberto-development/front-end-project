@@ -20,12 +20,12 @@ const routes: Routes = [
 
   {
     path: 'main',
-    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
     import('./main/main.module').then(
       (m) => m.MainModule
     )
-  },
+  }
 ];
 
 @NgModule({

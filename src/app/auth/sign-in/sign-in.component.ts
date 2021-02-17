@@ -16,6 +16,11 @@ export class SignInComponent {
   errore: boolean = false;
   errorMessage;
 
+  // formSignIn: FormGroup= new FormGroup({
+  //   email: new FormControl(null, [Validators.required]),
+  //   password: new FormControl(null,[Validators.required])
+  // });
+
   constructor(
     private router: Router,
     private authenticationService : AuthenticationService) {
@@ -23,6 +28,8 @@ export class SignInComponent {
 
 
   signIn(f: NgForm) {
+    // this.formSignIn.get("email").setValue(this)
+    // let emailFormGroup = this.formSignIn.get("email").value;
     const email = f.value.email;
     const password = f.value.password;
 

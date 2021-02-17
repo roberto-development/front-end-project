@@ -11,10 +11,3 @@ export class User extends Object {
     image: any;
 }
 
-/*
-export class Birthday extends Object {
-  year: number;
-  month: number;
-  day: number;
-}
-*/
