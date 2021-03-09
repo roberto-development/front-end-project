@@ -1,32 +1,69 @@
-<div class="container col-12" >
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <!--  style="outline-offset: 3px;" -->
-  <div class="container-fluid"> 
-    <div>
-      <img src="assets/stock-images/scai-group-logo.png">
-    </div>
-    <a class="navbar-brand offset-2 mr-3" type="image" src="assets/stock-images/scai-group-logo.png" href="https://www.grupposcai.it">Scai</a>
-    <!-- <button 
+<div class="container col-12 navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light offset-3">
+    <!--  style="outline-offset: 3px;" -->
+    <div class="container-fluid">
+      <div>
+        <!-- <img src="assets/stock-images/scai-group-logo.png"> -->
+        <a
+          class="navbar-brand offset-2 mr-3"
+          type="image"
+          src="assets/stock-images/scai-group-logo.png"
+          href="https://www.grupposcai.it"
+          >Scai</a
+        >
+      </div>
+      <!-- <button 
     class="navbar-toggler" 
     type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active mr-3" aria-current="page" href="#" style="margin:10px" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <button class="btn mr-3" (click)="goToProfile()" style="margin:10px">Profile</button>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-10" type="search" placeholder="Search" aria-label="Search" style="margin:10px">
-        <button class="btn btn-outline-success mr-1" type="submit" style="margin:10px">Search</button>
-        <button class="btn btn-primary right mr-10" (click)="logout()" style="margin:10px">Logout</button>
-      </form>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active mr-3"
+              aria-current="page"
+              href="#"
+              style="margin: 10px"
+              routerLink="/home"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <button
+              class="btn mr-3"
+              (click)="goToProfile()"
+              style="margin: 10px"
+            >
+              Profile
+            </button>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input
+            class="form-control me-10"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            style="margin: 10px"
+          />
+          <button
+            class="btn btn-outline-success mr-1"
+            type="submit"
+            style="margin: 10px"
+          >
+            Search
+          </button>
+          <button
+            class="btn btn-primary right mr-10"
+            (click)="logout()"
+            style="margin: 10px"
+          >
+            Logout
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </div>

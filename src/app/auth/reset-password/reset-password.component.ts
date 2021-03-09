@@ -9,20 +9,23 @@ import { AuthenticationComponent } from '../authentication/authentication.compon
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
   incorrectConfirmedPass: boolean;
   error: string;
 
-  constructor(private userService: UserService, private route: Router, private authenticationService: AuthenticationService) { }
+  constructor(
+    private userService: UserService,
+    private route: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.incorrectConfirmedPass = false;
   }
 
   resetPassword(f: NgForm) {
-
     let emailAccount = f.value.accountEmail;
     console.log(emailAccount);
     let oldPwd = f.value.oldPassword;
@@ -32,24 +35,21 @@ export class ResetPasswordComponent implements OnInit {
     if (newPwd !== newPassConfirmation) {
       this.incorrectConfirmedPass = true;
       console.log(`Incorrect password !!`);
-
     } else if (newPassConfirmation === newPassConfirmation) {
-
       const newPassword = newPwd.toString();
       this.authenticationService.resetPasswordAccount.email = emailAccount;
-      this.authenticationService.resetPasswordAccount.password= oldPwd;
+      this.authenticationService.resetPasswordAccount.password = oldPwd;
       this.authenticationService.resetPasswordAccount.newPassword = newPassword;
       this.authenticationService
         .resetPassword(this.authenticationService.resetPasswordAccount)
-        .subscribe(
-          (result: Account) => {
-            if (result.password) {
-              this.route.navigate(['/sign-in']);
-            } else {
-              this.error = 'probably a server problem, try later ';
-            }
-          })
-        }
+        .subscribe((result: Account) => {
+          if (result.password) {
+            this.route.navigate(['/login']);
+          } else {
+            this.error = 'probably a server problem, try later ';
+          }
+        });
+    }
     //     .toPromise()
     //     .then((result) => {
     //       if (result.password) {
@@ -63,7 +63,4 @@ export class ResetPasswordComponent implements OnInit {
     //     });
     // }
   }
-
-
-
 }

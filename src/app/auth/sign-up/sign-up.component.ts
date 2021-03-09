@@ -9,24 +9,19 @@ import { AuthenticationService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
   creatingAccount: boolean;
   errore: boolean = false;
-  countries: string[] = [
-    'Italy',
-    'France',
-    'Germany',
-    'Spain',
-    'England'
-  ];
+  countries: string[] = ['Italy', 'France', 'Germany', 'Spain', 'England'];
 
   selectedFile: File;
 
   constructor(
     private authService: AuthenticationService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.creatingAccount = false;
@@ -51,43 +46,36 @@ export class SignUpComponent implements OnInit {
     newUser.cognome = cognome;
     newUser.dataDiNascita = ddn;
     newUser.country = country;
-//  newUser.image = imageUpload;
+    //  newUser.image = imageUpload;
 
     newAccount.userDTO = newUser;
 
     console.log(newAccount);
-    
-    this.authService.createAccount(newAccount)
-    .subscribe(
-      (result : User) => {
-      console.log(result);
-     this.authService.loggedInUser = result
-    //  localStorage.setItem('account', JSON.stringify(result));
-     console.log(result)
-    //  localStorage.setItem('user', JSON.stringify(newAccount.user))
-     this.router.navigate(['/sign-in']) 
-    },
-    error => {
-      console.log(error);
-      this.errore = true;
-      
-    })
-  };
+
+    this.authService.createAccount(newAccount).subscribe(
+      (result: User) => {
+        console.log(result);
+        this.authService.loggedInUser = result;
+        //  localStorage.setItem('account', JSON.stringify(result));
+        console.log(result);
+        //  localStorage.setItem('user', JSON.stringify(newAccount.user))
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.log(error);
+        this.errore = true;
+      }
+    );
+  }
 
   // onFileChanged(event) {
   //   this.selectedFile = event.target.files[0];
   // }
 
   // onUpload() {
-// let uploadData = new FormData();
-// uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+  // let uploadData = new FormData();
+  // uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
 
-    // this.authService.uploadPhoto(this.selectedFile);
+  // this.authService.uploadPhoto(this.selectedFile);
   // }
-
-  
-
-  }
-  
-
-
+}

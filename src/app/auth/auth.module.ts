@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationComponent } from './authentication/authentication.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+// import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SharedModule } from '../shared/shared.module';
-import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner/loading-spinner.component';
 import { CommonModule } from '@angular/common';
-
+import { LoginComponent } from './sign-in/login/login.component';
 
 @NgModule({
   declarations: [
     AuthenticationComponent,
-    SignInComponent,
+    // SignInComponent,
     SignUpComponent,
     ResetPasswordComponent,
-
+    LoginComponent,
   ],
   imports: [
     AuthRoutingModule,
     FormsModule,
     SharedModule,
-    CommonModule
-  ]
+    CommonModule,
+    ReactiveFormsModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

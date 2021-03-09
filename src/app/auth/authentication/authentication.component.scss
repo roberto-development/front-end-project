@@ -1,7 +1,13 @@
 .btn btn-primary {
-   position: fixed;
- }
-
- btn btn-secondary btn-lg {
   position: fixed;
- }
+}
+
+btn btn-secondary btn-lg {
+  position: fixed;
+}
+
+.bg-img {
+  background-image: url("/assets/stock-images/bg-01.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
