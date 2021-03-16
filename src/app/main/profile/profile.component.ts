@@ -4,7 +4,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Image } from 'src/app/models/Image.model';
 import { User } from 'src/app/models/User.model';
-import { AuthenticationService } from 'src/app/services/auth.service';
+import { UserDTO } from 'src/app/models/UserDTO.model';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 export let browserRefresh = false;
 @Component({
@@ -13,7 +14,9 @@ export let browserRefresh = false;
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  user: User = null;
+  user: UserDTO = null;
+
+  userAuth: boolean = false;
 
   //  es. fare una form per modifica dati
   //  posso dichiarare formgroup istanzi nell'init e prima di farlo faccio chiamata per retrieve dusers data
@@ -43,30 +46,41 @@ export class ProfileComponent implements OnInit {
 
   imageProfile: any;
 
+  userTest: User;
+
   // upload foto to db
   selectedFile: Image = new Image();
 
   constructor(
     private userService: UserService,
-    private authService: AuthenticationService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private sharedServ: SharedService
   ) {}
 
   ngOnInit() {
-    this.user = this.authService.loggedInUser;
+    this.findUser();
+    this.user = this.sharedServ.loggedInUser;
+
     if (!this.user) {
       this.logout();
     }
+
+    this.sharedServ.isLogged;
+
     this.prova();
 
     const { id } = this.user;
 
     this.userId = id;
 
-    console.log(this.user);
-
     this.selectedFile.usersId = this.user.id;
-    console.log(this.selectedFile);
+  }
+
+  async onRefresh() {
+    const res = await this.sharedServ.getToken;
+    if (res) {
+      this.userTest = this.sharedServ.getCurrentUser.prototype;
+    }
   }
 
   onFileChanged(event) {
@@ -84,6 +98,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  test() {
+    const res = localStorage.getItem('token');
+    console.log(res);
+  }
+
   onUpload() {
     const payload: Image = {
       // id: this.,
@@ -92,37 +111,20 @@ export class ProfileComponent implements OnInit {
       img: this.imageBase64,
     };
     try {
-      this.authService.uploadPhoto(payload).toPromise();
+      this.sharedServ.uploadPhoto(payload).toPromise();
       this.user.image = this.imageBase64;
     } catch {
       console.error('diofa');
     }
-    //   console.log(res)
-    //   this.user.image = res;
-
-    // this.transform()
-    // console.log(this.user.image);
-    // });
-    // this.prova()
-    // console.log(this.user.image);
-    // this.transform()
   }
 
   async prova() {
     console.log(this.user);
 
-    const res = await this.authService.getProfilePic(this.user).toPromise();
+    const res = await this.sharedServ.getProfilePic(this.user).toPromise();
+
     console.log(res);
-    // debugger;
-
-    // this.user.image = JSON.parse(res).img;
-
-    // img da backend è in byte array
     this.user.image = res;
-    // console.log(this.user.image);
-
-    // this.idImage = JSON.parse(res).id;
-    // console.log(this.idImage);
     this.transform();
   }
 
@@ -130,8 +132,8 @@ export class ProfileComponent implements OnInit {
     return this.domSanitizer.bypassSecurityTrustHtml(this.user.image);
   }
 
-  CreateModal() {
-    document.getElementById('myDialog').showModal();
+  async findUser() {
+    const res = await this.sharedServ.getCurrentUser;
   }
 
   logout() {

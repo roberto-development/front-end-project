@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Account } from 'src/app/models/Account.model';
 import { User } from 'src/app/models/User.model';
 import { UserDTO } from 'src/app/models/UserDTO.model';
-import { AuthenticationService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,10 +18,7 @@ export class SignUpComponent implements OnInit {
 
   selectedFile: File;
 
-  constructor(
-    private authService: AuthenticationService,
-    private router: Router
-  ) {}
+  constructor(private authService: SharedService, private router: Router) {}
 
   ngOnInit() {
     this.creatingAccount = false;

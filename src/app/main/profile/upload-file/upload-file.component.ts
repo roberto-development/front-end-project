@@ -2,7 +2,7 @@
 // import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
 // import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 // import * as EventEmitter from 'events';
-// import { AuthenticationService } from 'src/app/services/auth.service';
+// import { SharedService } from 'src/app/services/auth.service';
 
 // @Component({
 //   selector: 'app-upload-file',
@@ -19,7 +19,7 @@
 //   constructor(
 //     private http: HttpClient,
 //     private formBuilder: FormBuilder,
-//     private authService: AuthenticationService
+//     private authService: SharedService
 //   ) { }
 
 //   ngOnInit(): void {
@@ -51,7 +51,6 @@
 //     const formData = new FormData();
 //     formData.append('formFile', this.fileUploadForm.get('myfile').value);
 //     formData.append('agentId', '007');
-
 
 //     this.http
 //       .post<any>('http://localhost:8080/api/updateImage', formData).subscribe(response => {

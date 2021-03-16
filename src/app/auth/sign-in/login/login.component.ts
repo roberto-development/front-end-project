@@ -4,7 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Account } from 'src/app/models/Account.model';
 import { User } from 'src/app/models/User.model';
-import { AuthenticationService } from 'src/app/services/auth.service';
+import { UserDTO } from 'src/app/models/UserDTO.model';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -21,23 +22,31 @@ export class LoginComponent implements OnInit {
 
   errore: boolean = false;
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router
-  ) {}
+  constructor(private router: Router, private sharedServ: SharedService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.sharedServ.isLogged()) {
+      this.isSubmitted = true;
+      this.router.navigate(['/profile']);
+      // this.authServ.loggedInUser;
+    }
+  }
 
   onSubmit() {
     let loginAccount = new Account();
     loginAccount.email = this.formSignIn.get('email').value;
     loginAccount.password = this.formSignIn.get('password').value;
     console.log(loginAccount);
-    this.authenticationService.login(loginAccount).subscribe(
-      (result: User) => {
-        localStorage.setItem('account', JSON.stringify(result.id));
-        this.authenticationService.loggedInUser = result;
-        this.authenticationService.checkLogin = true;
+    this.sharedServ.login(loginAccount).subscribe(
+      (result: UserDTO) => {
+        this.sharedServ.setToken(JSON.stringify(result.token));
+
+        console.log(result);
+        this.sharedServ.setToken(result.token);
+        this.sharedServ.setCurrentUser(result);
+
+        this.sharedServ.loggedInUser = result;
+        this.sharedServ.checkLogin = true;
         this.router.navigate(['profile']);
         this.isLoading = false;
       },
@@ -49,4 +58,27 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  reloadPage(): void {
+    window.location.reload();
+  }
+
+  // if (
+  //   responseData.headers.get('Authentication') &&
+  //   responseData.body.id
+  // ) {
+  //   localStorage.setItem(
+  //     'token',
+  //     responseData.headers.get('Authentication')
+  //   );
+  //   this.authService._authenticatedUser.next(responseData.body);
+  //   this.authService.token = responseData.headers.get('Authentication');
+  //   setTimeout(() => {
+  //     this.combination = false;
+  //     // this.loading = false;
+  //     this.router.navigate(['/home']);
+  //   }, 900);
+  // } else {
+  //   this.combination = true;
+  //   this.loading = false;
+  // }
 }

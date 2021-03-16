@@ -3,7 +3,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Account } from 'src/app/models/Account.model';
 import { User } from 'src/app/models/User.model';
-import { AuthenticationService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,10 +22,7 @@ export class SignInComponent implements OnInit {
   //   password: new FormControl(null,[Validators.required])
   // });
 
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {}
+  constructor(private router: Router, private SharedService: SharedService) {}
 
   ngOnInit() {
     this.initForm;
@@ -53,11 +50,11 @@ export class SignInComponent implements OnInit {
     console.log(signedInAccount);
     this.isLoading = true;
 
-    this.authenticationService.login(signedInAccount).subscribe(
+    this.SharedService.login(signedInAccount).subscribe(
       (result: User) => {
         localStorage.setItem('account', JSON.stringify(result.id));
-        this.authenticationService.loggedInUser = result;
-        this.authenticationService.checkLogin = true;
+        this.SharedService.loggedInUser = result;
+        this.SharedService.checkLogin = true;
         this.router.navigate(['/profile']);
         console.log('arrived');
         this.isLoading = false;

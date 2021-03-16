@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Account } from 'src/app/models/Account.model';
-import { AuthenticationService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 import { AuthenticationComponent } from '../authentication/authentication.component';
 
@@ -18,7 +18,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: Router,
-    private authenticationService: AuthenticationService
+    private SharedService: SharedService
   ) {}
 
   ngOnInit() {
@@ -37,18 +37,18 @@ export class ResetPasswordComponent implements OnInit {
       console.log(`Incorrect password !!`);
     } else if (newPassConfirmation === newPassConfirmation) {
       const newPassword = newPwd.toString();
-      this.authenticationService.resetPasswordAccount.email = emailAccount;
-      this.authenticationService.resetPasswordAccount.password = oldPwd;
-      this.authenticationService.resetPasswordAccount.newPassword = newPassword;
-      this.authenticationService
-        .resetPassword(this.authenticationService.resetPasswordAccount)
-        .subscribe((result: Account) => {
-          if (result.password) {
-            this.route.navigate(['/login']);
-          } else {
-            this.error = 'probably a server problem, try later ';
-          }
-        });
+      this.SharedService.resetPasswordAccount.email = emailAccount;
+      this.SharedService.resetPasswordAccount.password = oldPwd;
+      this.SharedService.resetPasswordAccount.newPassword = newPassword;
+      this.SharedService.resetPassword(
+        this.SharedService.resetPasswordAccount
+      ).subscribe((result: Account) => {
+        if (result.password) {
+          this.route.navigate(['/login']);
+        } else {
+          this.error = 'probably a server problem, try later ';
+        }
+      });
     }
     //     .toPromise()
     //     .then((result) => {
