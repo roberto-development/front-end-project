@@ -1,3 +1,4 @@
 export class TokenDTO extends Object {
-  expiration: string;
+  expiration: number;
+  token: string;
 }

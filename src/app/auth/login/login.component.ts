@@ -2,9 +2,10 @@ import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Account } from 'src/app/models/Account.model';
-import { User } from 'src/app/models/User.model';
+import { AccountLogin } from 'src/app/models/Account.model';
+import { TokenDTO } from 'src/app/models/TokenDTO.model';
 import { UserDTO } from 'src/app/models/UserDTO.model';
+import { AuthenticationService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class LoginComponent implements OnInit {
   isSubmitted = false;
+  userDTOprova: UserDTO;
   isLoading = false;
   formSignIn: FormGroup = new FormGroup({
     email: new FormControl(null, Validators.required),
@@ -22,7 +24,11 @@ export class LoginComponent implements OnInit {
 
   errore: boolean = false;
 
-  constructor(private router: Router, private sharedServ: SharedService) {}
+  constructor(
+    private router: Router,
+    private sharedServ: SharedService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     if (this.sharedServ.isLogged()) {
@@ -32,34 +38,52 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    let loginAccount = new Account();
+  async onSubmit() {
+    let loginAccount = new AccountLogin();
     loginAccount.email = this.formSignIn.get('email').value;
     loginAccount.password = this.formSignIn.get('password').value;
-    console.log(loginAccount);
-    this.sharedServ.login(loginAccount).subscribe(
-      (result: UserDTO) => {
-        this.sharedServ.setToken(JSON.stringify(result.token));
+    try {
+      const value = await this.authenticationService.login(loginAccount);
+      // this.sharedServ.setToken(value.token);
+      localStorage.setItem('token', value.token);
 
-        console.log(result);
-        this.sharedServ.setToken(result.token);
-        this.sharedServ.setCurrentUser(result);
+      // settare expiration in localStorage
+      // const userInfo = await this.authenticationService
+      //   .getUserInfo()
+      //   .toPromise();
+      // this.sharedServ.loggedInUser = userInfo;
+      console.log(this.sharedServ.loggedInUser);
 
-        this.sharedServ.loggedInUser = result;
-        this.sharedServ.checkLogin = true;
-        this.router.navigate(['profile']);
-        this.isLoading = false;
-      },
-      (error) => {
-        error.message;
-        console.log('An error occured!' + error);
-        this.errore = true;
-        this.isLoading = false;
-      }
-    );
+      // localStorage.setItem('currentUser', JSON.stringify(userInfo));
+
+      this.router.navigate(['/profile']);
+      this.isLoading = false;
+    } catch (error) {
+      error.message;
+      console.log('An error occured!' + error);
+      this.errore = true;
+      this.isLoading = false;
+    }
   }
+
   reloadPage(): void {
     window.location.reload();
+  }
+
+  getIdUser() {
+    return JSON.parse(localStorage.getItem('token'));
+  }
+
+  onRefresh() {
+    const token = localStorage.getItem('token');
+    let payload;
+    if (token) {
+      payload = token.split('.')[1];
+      payload = window.atob(payload);
+      return JSON.parse(payload);
+    } else {
+      return null;
+    }
   }
 
   // if (

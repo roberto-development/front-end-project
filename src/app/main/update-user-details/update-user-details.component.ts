@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Account } from 'src/app/models/Account.model';
 import { User } from 'src/app/models/User.model';
 import { UserDTO } from 'src/app/models/UserDTO.model';
 import { SharedService } from 'src/app/services/shared.service';

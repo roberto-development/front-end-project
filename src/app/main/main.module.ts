@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthGuard } from '../guards/auth.guard';
 import { FriendshipComponent } from './profile/friendship/friendship.component';
 import { PostComponent } from './profile/post/post.component';
-import { LeftMenuComponent } from '../shared/left-menu/left-menu.component';
+import { MainGuard } from '../guards/main.guard';
 // import { UploadFileComponent } from './profile/upload-file/upload-file.component';
 
 @NgModule({
@@ -25,6 +25,6 @@ import { LeftMenuComponent } from '../shared/left-menu/left-menu.component';
     // UploadFileComponent
   ],
   imports: [CommonModule, MainRoutingModule, FormsModule, SharedModule],
-  providers: [AuthGuard],
+  providers: [MainGuard],
 })
 export class MainModule {}

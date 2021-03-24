@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Image } from 'src/app/models/Image.model';
 import { User } from 'src/app/models/User.model';
 import { UserDTO } from 'src/app/models/UserDTO.model';
+import { AuthenticationService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 export let browserRefresh = false;
@@ -44,6 +45,8 @@ export class ProfileComponent implements OnInit {
   idImage: any;
   base64Image: any;
 
+  userData: any;
+
   imageProfile: any;
 
   userTest: User;
@@ -54,18 +57,13 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private domSanitizer: DomSanitizer,
-    private sharedServ: SharedService
+    private sharedServ: SharedService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit() {
-    this.findUser();
-    this.user = this.sharedServ.loggedInUser;
-
-    if (!this.user) {
-      this.logout();
-    }
-
-    this.sharedServ.isLogged;
+    this.getAndSetUserInfo();
+    // this.user = this.sharedServ.loggedInUser;
 
     this.prova();
 
@@ -76,11 +74,14 @@ export class ProfileComponent implements OnInit {
     this.selectedFile.usersId = this.user.id;
   }
 
-  async onRefresh() {
-    const res = await this.sharedServ.getToken;
-    if (res) {
-      this.userTest = this.sharedServ.getCurrentUser.prototype;
-    }
+  async getAndSetUserInfo() {
+    const userInfo = await this.authenticationService.getUserInfo().toPromise();
+    this.user = userInfo;
+    console.log(this.user);
+  }
+
+  onCheckToken() {
+    return this.sharedServ.isLogged;
   }
 
   onFileChanged(event) {
@@ -96,11 +97,6 @@ export class ProfileComponent implements OnInit {
       reader.readAsDataURL(selectedImage);
       //
     }
-  }
-
-  test() {
-    const res = localStorage.getItem('token');
-    console.log(res);
   }
 
   onUpload() {
@@ -121,7 +117,7 @@ export class ProfileComponent implements OnInit {
   async prova() {
     console.log(this.user);
 
-    const res = await this.sharedServ.getProfilePic(this.user).toPromise();
+    const res = await this.sharedServ.getProfilePic().toPromise();
 
     console.log(res);
     this.user.image = res;
@@ -132,9 +128,21 @@ export class ProfileComponent implements OnInit {
     return this.domSanitizer.bypassSecurityTrustHtml(this.user.image);
   }
 
-  async findUser() {
-    const res = await this.sharedServ.getCurrentUser;
-  }
+  // async findUser() {
+  //   const res = await this.sharedServ.getUserInfo()
+  //   ;
+  //   // .subscribe(
+  //   //   (result) => {
+  //   //   console.log(res);
+  //   //   console.log(result);
+  //   //   this.sharedServ.setCurrentUser(JSON.stringify(result.valueOf));
+  //   //   console.log(this.sharedServ.loggedInUser);
+
+  //   //   if (res) {
+  //   //     this.prova();
+  //   //   }
+  //   //   })
+  // }
 
   logout() {
     this.userService.logout();

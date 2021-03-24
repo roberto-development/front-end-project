@@ -14,15 +14,13 @@ import { SharedService } from '../services/shared.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements OnInit, CanActivate {
+export class MainGuard implements OnInit, CanActivate {
   // logic for auth user
   // return true or false
 
-  constructor(private router: Router, private sharedServ: SharedService) {}
+  constructor(private router: Router, private sharedService: SharedService) {}
 
-  ngOnInit() {
-    console.log('Auth Guard activated!');
-  }
+  ngOnInit() {}
 
   isLogged() {
     // sfrutto per gestire l'avanzamento di canActivate
@@ -36,12 +34,13 @@ export class AuthGuard implements OnInit, CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    const token = this.sharedServ.getToken;
-    if (token) {
-      this.router.navigate(['/profile']);
-      return false;
-    } else {
+    const token = this.sharedService.getToken;
+    // se loggato return true altrimenti false e torna alla login
+    if (localStorage.getItem('token')) {
       return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
     }
   }
 }

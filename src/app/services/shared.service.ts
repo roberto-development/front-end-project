@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Account } from '../models/Account.model';
+import { environment } from 'src/environments/environment';
+import { AccountLogin } from '../models/Account.model';
+import { TokenDTO } from '../models/TokenDTO.model';
 import { User } from '../models/User.model';
 import { UserDTO } from '../models/UserDTO.model';
 import { AuthenticationService } from './auth.service';
@@ -19,43 +22,43 @@ export class SharedService {
   private currentUser: User;
   checkLogin: boolean = false;
 
-  private token: any;
+  private token: string;
   loggedInUser: UserDTO = null;
 
   passwordResetter: string;
-  resetPasswordAccount: Account = new Account();
+  resetPasswordAccount: AccountLogin = new AccountLogin();
 
   constructor(private authService: AuthenticationService) {}
-
-  // -----
-  login(account) {
-    return this.authService.login(account);
-  }
 
   updateUser(user: User) {
     return this.authService.updateUser(user);
   }
 
   setToken(token) {
-    localStorage.setItem(TOKEN, token);
-    this.token = token;
-    console.log(this.token);
+    if (token !== null) {
+      localStorage.setItem('token', token);
+      this.token = token;
+      console.log(this.token);
+    } else {
+      let getItem = localStorage.getItem('token');
+      console.log(JSON.stringify(getItem));
+    }
   }
 
   uploadPhoto(profilePicture) {
     return this.authService.uploadPhoto(profilePicture);
   }
 
-  getToken() {
-    if (!this.token) {
-      this.token = localStorage.getItem(TOKEN);
-    }
-    return this.token;
+  public getToken(): string {
+    return localStorage.getItem('token');
   }
 
   clearToken() {
-    this.token = null;
-    localStorage.removeItem(TOKEN);
+    if (localStorage.getItem(TOKEN)) {
+      localStorage.removeItem(TOKEN);
+    }
+    if (localStorage.getItem(CURRENT_USER))
+      localStorage.removeItem(CURRENT_USER);
   }
 
   resetPassword(account): Observable<Account> {
@@ -63,7 +66,6 @@ export class SharedService {
   }
 
   isLogged(): boolean {
-    // token sia presente
     return this.token ? true : false;
   }
 
@@ -71,23 +73,27 @@ export class SharedService {
     return this.authService.createAccount(newAccount);
   }
 
+  public getUserInfo() {
+    this.authService.getUserInfo().subscribe((res) => {
+      console.log(res);
+      return res;
+    });
+  }
+
   setCurrentUser(userdata) {
-    localStorage.setItem(CURRENT_USER, userdata);
-    // non c'è bisogno di settare il toke, è legato all'utenza
-
     // this.currentUser = JSON.parse(userdata) as User;
-    this.currentUser = userdata as UserDTO;
+    this.loggedInUser = userdata as UserDTO;
   }
 
-  getCurrentUser() {
-    if (!this.currentUser) {
-      let userdatastring = localStorage.getItem(CURRENT_USER);
-      this.currentUser = userdatastring
-        ? (JSON.parse(userdatastring) as User)
-        : null;
-    }
-    return this.currentUser;
-  }
+  // getCurrentUser() {
+  //   if (!this.currentUser) {
+  //     let userdatastring = localStorage.getItem(CURRENT_USER);
+  //     this.currentUser = userdatastring
+  //       ? (JSON.parse(userdatastring) as User)
+  //       : null;
+  //   }
+  //   return this.currentUser;
+  // }
 
   clearCurrentUser() {
     this.currentUser = null;
@@ -101,12 +107,12 @@ export class SharedService {
     }
   }
 
-  public getProfilePic(userId: UserDTO) {
-    return this.authService.getProfilePic(userId);
+  public getProfilePic() {
+    return this.authService.getProfilePic();
   }
 
   clearAllSession() {
-    this.clearCurrentUser();
+    // this.clearCurrentUser();
     this.clearToken();
   }
 }

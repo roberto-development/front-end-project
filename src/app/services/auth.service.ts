@@ -1,18 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { ReturnStatement } from '@angular/compiler';
 import { Token } from '@angular/compiler/src/ml_parser/lexer';
-import { Byte } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Account } from '../models/Account.model';
+import { AccountLogin } from '../models/Account.model';
 import { Image } from '../models/Image.model';
 import { TokenDTO } from '../models/TokenDTO.model';
 import { User } from '../models/User.model';
 import { UserDTO } from '../models/UserDTO.model';
+import { TokenInterceptor } from '../token-interceptor/token.interceptor';
 import { SharedService } from './shared.service';
 @Injectable({
   providedIn: 'root',
@@ -30,20 +27,35 @@ export class AuthenticationService {
   // private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
 
   passwordResetter: string;
-  resetPasswordAccount: Account = new Account();
+  resetPasswordAccount: AccountLogin = new AccountLogin();
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private sharedServ: SharedService
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // public login(account: Account): Observable<User> {
   //   return this.http.post<User>(environment.rootUrl + `/login`, account);
+
+  // : Observable<UserDTO>
   // }
 
-  public login(account: Account): Observable<UserDTO> {
-    return this.http.post<UserDTO>(environment.rootUrl + `/getUser`, account);
+  public login(account: AccountLogin) {
+    console.log(account);
+    return new Promise<TokenDTO>((resolve, reject) => {
+      this.http
+        .post<TokenDTO>(environment.rootUrl + `/login`, account)
+        .subscribe(
+          (result) => {
+            console.log('dentro metodo login ' + result.token);
+            // localStorage.setItem('token', result);
+            resolve(result);
+          },
+          (error) => {
+            reject(error);
+            // in caso di errore rigetta il messaggio
+          }
+        );
+    });
+
+    // return this.http.post<TokenDTO>(environment.rootUrl + `/getUser`, account);
   }
 
   // public login(account: Account): Observable<User> {
@@ -71,9 +83,10 @@ export class AuthenticationService {
     return !!localStorage.getItem('currentUser');
   }
 
-  public getToken(): any {
-    return this.sharedServ.getToken();
+  public getUserInfo() {
+    return this.http.get<UserDTO>(environment.rootUrl + '/getUserInfo');
   }
+
   // private doLoginUser(id: number, tokens: any) {
   //   this.loggedInUser.id = id;
   //   this.storeTokens(tokens);
@@ -110,8 +123,8 @@ export class AuthenticationService {
   //   return !this.jwtHelper.isTokenExpired(token);
   // }
 
-  public getProfilePic(userId: UserDTO): Observable<any> {
-    return this.http.post(environment.rootUrl + '/getImage', userId, {
+  public getProfilePic(): Observable<any> {
+    return this.http.get(environment.rootUrl + '/getImage', {
       responseType: 'text',
     });
   }

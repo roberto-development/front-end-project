@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Account } from 'src/app/models/Account.model';
+import { AccountLogin } from 'src/app/models/Account.model';
 import { User } from 'src/app/models/User.model';
 import { UserDTO } from 'src/app/models/UserDTO.model';
 import { SharedService } from 'src/app/services/shared.service';
@@ -33,7 +33,7 @@ export class SignUpComponent implements OnInit {
     const ddn = f.value.ddn;
     const country = f.value.country;
 
-    let newAccount = new Account();
+    let newAccount = new AccountLogin();
     let newUser = new User();
 
     newAccount.email = email;
