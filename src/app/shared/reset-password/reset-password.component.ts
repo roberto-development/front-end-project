@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AccountLogin } from 'src/app/models/Account.model';
 import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
-import { AuthenticationComponent } from '../authentication/authentication.component';
 
 @Component({
   selector: 'app-reset-password',

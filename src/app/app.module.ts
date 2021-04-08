@@ -7,19 +7,27 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { MainModule } from './main/main.module';
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 import { AuthModule } from './auth/auth.module';
 import { TokenInterceptor } from './token-interceptor/token.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
+import { MainWrapperModule } from './main-wrapper/main-wrapper.module';
+import { WrapperComponent } from './main-wrapper/main-wrapper.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, WrapperComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MainModule,
     AuthModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    MainWrapperModule,
+    // MDBBootstrapModule.forRoot(),
   ],
   providers: [
     {

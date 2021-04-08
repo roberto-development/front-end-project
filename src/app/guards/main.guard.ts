@@ -34,7 +34,9 @@ export class MainGuard implements OnInit, CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    const token = this.sharedService.getToken;
+    const token = this.sharedService.getToken();
+    console.log(token);
+
     // se loggato return true altrimenti false e torna alla login
     if (localStorage.getItem('token')) {
       return true;

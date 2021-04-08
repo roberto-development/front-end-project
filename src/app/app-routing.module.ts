@@ -17,9 +17,32 @@ const routes: Routes = [
   },
 
   {
-    path: 'main',
-    loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
-    canActivate: [MainGuard],
+    path: '',
+    children: [
+      {
+        path: '',
+        loadChildren: './main-wrapper/main-wrapper.module#MainWrapperModule',
+      },
+      // { path:'home-page', component: HomeComponent},
+      {
+        path: 'profile',
+        loadChildren:
+          './main-wrapper/profile/ ./main-wrapper/MainWrapperModule#',
+        canActivate: [MainGuard],
+      },
+      // {
+      //   path: 'update-user-details',
+      //   component: UpdateUserDetailsComponent,
+      //   canActivate: [MainGuard],
+      // },
+      // {
+      //   path: 'friendship',
+      //   component: FriendshipComponent,
+      //   canActivate: [MainGuard],
+      // },
+    ],
+    // component: WrapperComponent,
+    // canActivate: [MainGuard],
   },
   // { path: '**', redirectTo: 'auth' },
 ];

@@ -4,15 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 // import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { LoginComponent } from './login/login.component';
+// import { ResetPasswordComponent } from '../shared/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'auth', component: AuthenticationComponent },
   // { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
+  // { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'login', component: LoginComponent },
 ];
 

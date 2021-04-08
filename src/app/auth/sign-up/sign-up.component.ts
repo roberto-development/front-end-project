@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountLogin } from 'src/app/models/Account.model';
 import { User } from 'src/app/models/User.model';
@@ -16,6 +16,11 @@ export class SignUpComponent implements OnInit {
   errore: boolean = false;
   countries: string[] = ['Italy', 'France', 'Germany', 'Spain', 'England'];
 
+  formRegister: FormGroup = new FormGroup({
+    email: new FormControl(null, Validators.required),
+    password: new FormControl(''),
+  });
+
   selectedFile: File;
 
   constructor(private authService: SharedService, private router: Router) {}
@@ -24,37 +29,25 @@ export class SignUpComponent implements OnInit {
     this.creatingAccount = false;
   }
 
-  signUp(f: FormGroup) {
+  async onSubmit() {
     this.creatingAccount = true;
-    const email = f.value.email;
-    const password = f.value.password;
-    const nome = f.value.nome;
-    const cognome = f.value.cognome;
-    const ddn = f.value.ddn;
-    const country = f.value.country;
+    let signUpAccount = new AccountLogin();
+    signUpAccount.email = this.formRegister.get('email').value;
+    signUpAccount.password = this.formRegister.get('password').value;
 
-    let newAccount = new AccountLogin();
-    let newUser = new User();
+    let newUser = new UserDTO();
+    newUser.nome = this.formRegister.get('nome').value;
+    newUser.cognome = this.formRegister.get('cognome').value;
+    newUser.dataDiNascita = this.formRegister.get('ddn').value;
+    newUser.country = this.formRegister.get('country').value;
 
-    newAccount.email = email;
-    newAccount.password = password;
+    signUpAccount.userDTO = newUser;
 
-    newUser.nome = nome;
-    newUser.cognome = cognome;
-    newUser.dataDiNascita = ddn;
-    newUser.country = country;
-    //  newUser.image = imageUpload;
-
-    newAccount.userDTO = newUser;
-
-    console.log(newAccount);
-
-    this.authService.createAccount(newAccount).subscribe(
-      (result: User) => {
+    this.authService.createAccount(signUpAccount).subscribe(
+      (result: UserDTO) => {
         console.log(result);
-        this.authService.loggedInUser = result;
+        // this.authService.loggedInUser = result;
         //  localStorage.setItem('account', JSON.stringify(result));
-        console.log(result);
         //  localStorage.setItem('user', JSON.stringify(newAccount.user))
         this.router.navigate(['/login']);
       },
@@ -62,17 +55,17 @@ export class SignUpComponent implements OnInit {
         console.log(error);
         this.errore = true;
       }
+
+      // onFileChanged(event) {
+      //   this.selectedFile = event.target.files[0];
+      // }
+
+      // onUpload() {
+      // let uploadData = new FormData();
+      // uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+
+      // this.authService.uploadPhoto(this.selectedFile);
+      // }
     );
   }
-
-  // onFileChanged(event) {
-  //   this.selectedFile = event.target.files[0];
-  // }
-
-  // onUpload() {
-  // let uploadData = new FormData();
-  // uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-
-  // this.authService.uploadPhoto(this.selectedFile);
-  // }
 }

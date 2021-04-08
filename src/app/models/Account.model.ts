@@ -1,4 +1,4 @@
-import { User } from './User.model';
+import { UserDTO } from './UserDTO.model';
 
 export class AccountLogin extends Object {
   // id: number;
@@ -7,5 +7,5 @@ export class AccountLogin extends Object {
   newPassword: string;
   // new email e new password?
   // altro component AccountDTO o le metto come proprietà di questo oggetto
-  userDTO: User;
+  userDTO: UserDTO;
 }

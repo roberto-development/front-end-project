@@ -3,6 +3,7 @@ export class UserDTO extends Object {
 
   nome: string;
 
+  // rimuovere campi new
   newNome: string;
 
   cognome: string;
@@ -18,6 +19,4 @@ export class UserDTO extends Object {
   newCountry: string;
 
   image: any;
-
-  token: any;
 }

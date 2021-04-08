@@ -6,7 +6,30 @@
   transform: translate(-50%, -50%);
 }
 
+.customProfile {
+  position: inherit;
+}
+
 .customWidthHeight {
   width: 100%;
   height: 100%;
+  min-height: 67vw;
+}
+
+.customBackground {
+  background-image: url("assets/stock-images/clix.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+html,
+body {
+  height: 100%;
+  // }
+  // body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url("assets/stock-images/plenio.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: darken;
 }

@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountLogin } from '../models/Account.model';
+import { Post } from '../models/Post.model';
 import { TokenDTO } from '../models/TokenDTO.model';
 import { User } from '../models/User.model';
 import { UserDTO } from '../models/UserDTO.model';
 import { AuthenticationService } from './auth.service';
+import { UserService } from './user.service';
 
 // ---const---
 const TOKEN: string = 'token';
@@ -28,7 +30,10 @@ export class SharedService {
   passwordResetter: string;
   resetPasswordAccount: AccountLogin = new AccountLogin();
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private userService: UserService
+  ) {}
 
   updateUser(user: User) {
     return this.authService.updateUser(user);
@@ -114,5 +119,17 @@ export class SharedService {
   clearAllSession() {
     // this.clearCurrentUser();
     this.clearToken();
+  }
+
+  posts: Post[];
+
+  getPost(): Post[] {
+    this.userService.getPost().subscribe((result: Post[]) => {
+      console.log(result);
+
+      this.posts = result;
+      console.log(this.posts);
+    });
+    return this.posts;
   }
 }

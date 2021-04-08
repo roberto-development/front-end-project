@@ -1,9 +1,7 @@
-import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountLogin } from 'src/app/models/Account.model';
-import { TokenDTO } from 'src/app/models/TokenDTO.model';
 import { UserDTO } from 'src/app/models/UserDTO.model';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -44,17 +42,8 @@ export class LoginComponent implements OnInit {
     loginAccount.password = this.formSignIn.get('password').value;
     try {
       const value = await this.authenticationService.login(loginAccount);
-      // this.sharedServ.setToken(value.token);
       localStorage.setItem('token', value.token);
-
-      // settare expiration in localStorage
-      // const userInfo = await this.authenticationService
-      //   .getUserInfo()
-      //   .toPromise();
-      // this.sharedServ.loggedInUser = userInfo;
-      console.log(this.sharedServ.loggedInUser);
-
-      // localStorage.setItem('currentUser', JSON.stringify(userInfo));
+      this.sharedServ.setToken(value.token);
 
       this.router.navigate(['/profile']);
       this.isLoading = false;

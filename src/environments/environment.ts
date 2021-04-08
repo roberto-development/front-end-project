@@ -4,10 +4,7 @@
 
 export const environment = {
   production: false,
-
-   //rootUrl: ' https://glacial-badlands-58060.herokuapp.com',
-   rootUrl: 'http://localhost:8080/api'
-  //  rootUpdateAccount: 'http://localhost:8080/a'
+  rootUrl: 'http://localhost:8080/api',
 };
 
 /*

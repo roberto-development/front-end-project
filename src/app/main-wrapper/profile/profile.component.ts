@@ -1,13 +1,12 @@
-import { ProviderAst } from '@angular/compiler';
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Image } from 'src/app/models/Image.model';
 import { User } from 'src/app/models/User.model';
 import { UserDTO } from 'src/app/models/UserDTO.model';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
+import { RightMenuComponent } from 'src/app/shared/right-menu/right-menu.component';
 export let browserRefresh = false;
 @Component({
   selector: 'app-profile',
@@ -15,41 +14,16 @@ export let browserRefresh = false;
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  // @ViewChild('rightmenu', { static: false })
+  // rightMenuComponent: RightMenuComponent;
+
   user: UserDTO = null;
 
-  userAuth: boolean = false;
-
-  //  es. fare una form per modifica dati
-  //  posso dichiarare formgroup istanzi nell'init e prima di farlo faccio chiamata per retrieve dusers data
-  //  prendo dati e li salvo localmente in currentUser di classe, faccio init form e dichiaro i controls che di dovranno essere e i valori
-  //  this.currentUSer.name e così via
-  //  se dinamico creo un metodo per fare tutto ciò
-
   userId: number;
-
   imageBase64: string;
-  loadProfile: boolean;
-  imagePath: string;
-  retrieveResponse: any;
-  base64Data: any;
-  retrievedImage: any;
-  stringBase64: any = '';
-  stringDemo: string;
-  stringData: 'data:image/png;base64,';
-
-  imageUrl: any;
-  receivedImageData: any;
-  newBase64Data: any;
-  convertedImage: any;
-
   idImage: any;
-  base64Image: any;
-
-  userData: any;
-
-  imageProfile: any;
-
-  userTest: User;
+  expression: true;
+  // showRightMenu = false;
 
   // upload foto to db
   selectedFile: Image = new Image();
@@ -67,17 +41,19 @@ export class ProfileComponent implements OnInit {
 
     this.prova();
 
-    const { id } = this.user;
-
-    this.userId = id;
-
-    this.selectedFile.usersId = this.user.id;
+    // const { id } = this.user;
+    console.log(this.sharedServ.loggedInUser);
   }
 
   async getAndSetUserInfo() {
     const userInfo = await this.authenticationService.getUserInfo().toPromise();
+    this.sharedServ.loggedInUser = userInfo;
+
+    // utente salvato in shared
+    console.log(this.sharedServ.loggedInUser);
+    this.selectedFile.usersId = this.sharedServ.loggedInUser.id;
     this.user = userInfo;
-    console.log(this.user);
+    console.log(' ' + this.user);
   }
 
   onCheckToken() {
@@ -119,30 +95,15 @@ export class ProfileComponent implements OnInit {
 
     const res = await this.sharedServ.getProfilePic().toPromise();
 
-    console.log(res);
+    // console.log('img profile: ' + res);
     this.user.image = res;
-    this.transform();
+    const transformed = this.transform();
+    return transformed;
   }
 
-  async transform() {
+  transform() {
     return this.domSanitizer.bypassSecurityTrustHtml(this.user.image);
   }
-
-  // async findUser() {
-  //   const res = await this.sharedServ.getUserInfo()
-  //   ;
-  //   // .subscribe(
-  //   //   (result) => {
-  //   //   console.log(res);
-  //   //   console.log(result);
-  //   //   this.sharedServ.setCurrentUser(JSON.stringify(result.valueOf));
-  //   //   console.log(this.sharedServ.loggedInUser);
-
-  //   //   if (res) {
-  //   //     this.prova();
-  //   //   }
-  //   //   })
-  // }
 
   logout() {
     this.userService.logout();
