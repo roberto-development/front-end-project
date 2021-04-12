@@ -25,14 +25,14 @@ export class PostComponent implements OnInit {
     this.userService.getPost().subscribe((result: Post[]) => {
       console.log(result);
       this.userPost = result;
-      this.userPost.forEach((element) => {
-        let categoriaId = element.categoria;
-        this.userService
-          .getCategoria(categoriaId)
-          .subscribe((result: CategoriaPost) => {
-            console.log(result);
-          });
-      });
+      // this.userPost.forEach((element) => {
+      //   let categoriaId = element.categoria;
+      //   this.userService
+      //     .getCategoria(categoriaId)
+      //     .subscribe((result: CategoriaPost) => {
+      //       console.log(result);
+      //     });
+      // });
     });
   }
 }

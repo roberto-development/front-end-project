@@ -2,6 +2,9 @@
 <ng-container>
   <div class="container-fluid">
     <div class="row col-12 offset-3">
+      <div class="card-header">
+        <h2>Admin</h2>
+      </div>
       <ul class="nav navbar-expand">
         <button type="button" class="btn btn-primary">CREATE</button>
         <button type="button" class="btn btn-secondary">UPDATE</button>
@@ -12,7 +15,6 @@
     <div class="row col-12 offset-3">
       <div class="card">
         <!-- id, descrizione, categoria (img) -->
-
         <table class="table">
           <thead>
             <tr>
@@ -29,7 +31,7 @@
               <td>{{ post.descrizione }}</td>
               <td>3</td>
               <td>
-                <button class="btn btn-secondary">View</button>
+                <button class="btn btn-primary">View</button>
                 <button class="btn btn-secondary">Edit</button>
                 <button class="btn btn-secondary btn-danger">X</button>
               </td>
