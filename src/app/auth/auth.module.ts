@@ -6,6 +6,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,7 @@ import { LoginComponent } from './login/login.component';
     AuthRoutingModule,
     FormsModule,
     SharedModule,
-    // CommonModule,
-    // BrowserModule,
+    MatCardModule,
     ReactiveFormsModule,
   ],
 })
