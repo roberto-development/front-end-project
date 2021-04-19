@@ -15,7 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MainWrapperModule } from './main-wrapper/main-wrapper.module';
 import { WrapperComponent } from './main-wrapper/main-wrapper.component';
-
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 @NgModule({
   declarations: [AppComponent, WrapperComponent],
   imports: [
@@ -27,6 +27,7 @@ import { WrapperComponent } from './main-wrapper/main-wrapper.component';
     BrowserAnimationsModule,
     SharedModule,
     MainWrapperModule,
+
     // MDBBootstrapModule.forRoot(),
   ],
   providers: [
@@ -35,6 +36,8 @@ import { WrapperComponent } from './main-wrapper/main-wrapper.component';
       useClass: TokenInterceptor,
       multi: true,
     },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
   ],
   bootstrap: [AppComponent],
 })

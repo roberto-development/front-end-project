@@ -7,6 +7,12 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { RightMenuComponent } from './right-menu/right-menu.component';
 import { SharedRoutingModule } from './shared-routing.module';
 import { ModalFormComponent } from './modal/modal-form/modal-form.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListItem, MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { CommonModule, NgIf } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -17,13 +23,27 @@ import { ModalFormComponent } from './modal/modal-form/modal-form.component';
     ResetPasswordComponent,
     ModalFormComponent,
   ],
-  imports: [SharedRoutingModule, FormsModule],
+  imports: [
+    SharedRoutingModule,
+    FormsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    CommonModule,
+  ],
   exports: [
     NavbarComponent,
     LoadingSpinnerComponent,
     LeftMenuComponent,
     RightMenuComponent,
     ResetPasswordComponent,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
   ],
 })
 export class SharedModule {}

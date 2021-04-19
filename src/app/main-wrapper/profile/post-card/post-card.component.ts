@@ -1,23 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoriaPost } from 'src/app/models/CategoriaPost.model';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Post } from 'src/app/models/Post.model';
-import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss'],
+  selector: 'app-post-card',
+  templateUrl: './post-card.component.html',
+  styleUrls: ['./post-card.component.scss'],
 })
-export class PostComponent implements OnInit {
+export class PostCardComponent implements OnInit {
   userPost: Post[] = [];
-  categoriaPost: string;
+
+  @Input()
+  /**
+   * commento visibile
+   */
+  post: Post;
+
+  // @Output()
+
   constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.getUserPost();
   }
+  /**
+   * lio
+   */
 
+  // async prova() {
+  //   // console.log('img profile: ' + res);
+  //   const transformed = this.transform();
+  //   return transformed;
+  // }
+
+  // transform() {
+  //   return this.domSanitizer.bypassSecurityTrustHtml(this.user.image);
+  // }
   getUserPost() {
     this.userService.getPost().subscribe((result: Post[]) => {
       console.log(result);
@@ -32,4 +50,8 @@ export class PostComponent implements OnInit {
       // });
     });
   }
+
+  // getPostImage() {
+  //   return this.userPost.
+  // }
 }

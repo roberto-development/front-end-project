@@ -1,7 +1,7 @@
 export class Post extends Object {
   id: number;
-  descrizione: string;
-  categoria: number;
+  descrizionePost: string;
+  categoriaPost: number;
   idUser: number;
-  img: string;
+  imgPost: string;
 }

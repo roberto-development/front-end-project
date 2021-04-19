@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-left-menu',
@@ -7,6 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftMenuComponent implements OnInit {
   constructor() {}
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  isExpanded = true;
+  showSubmenu: boolean = false;
+  isShowing = false;
+  showSubSubMenu: boolean = false;
 
   ngOnInit(): void {}
+
+  mouseenter() {
+    if (!this.isExpanded) {
+      this.isShowing = true;
+    }
+  }
+
+  mouseleave() {
+    if (!this.isExpanded) {
+      this.isShowing = false;
+    }
+  }
 }

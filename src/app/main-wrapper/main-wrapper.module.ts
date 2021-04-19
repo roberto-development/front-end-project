@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MainWrapperRoutingModule } from './main-wrapper-routing.module';
 import { ProfileWrapperModule } from './profile/profile.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -14,6 +19,11 @@ import { ProfileWrapperModule } from './profile/profile.module';
     SharedModule,
     FormsModule,
     ProfileWrapperModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
   ],
 })
 export class MainWrapperModule {}
