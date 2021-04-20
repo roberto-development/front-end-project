@@ -7,6 +7,7 @@ import { FriendshipComponent } from './profile/friendship/friendship.component';
 import { PostComponent } from './profile/post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateUserDetailsComponent } from './update-user-details/update-user-details.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,6 +23,11 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [MainGuard],
+      },
+      {
+        path: 'dashboard',
+        component: UserDashboardComponent,
         canActivate: [MainGuard],
       },
       {

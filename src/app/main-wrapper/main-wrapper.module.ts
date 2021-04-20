@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { UserDashboardModule } from './user-dashboard/user-dashboard.module';
 
 @NgModule({
   declarations: [],
@@ -24,6 +26,7 @@ import { MatListModule } from '@angular/material/list';
     MatListModule,
     MatButtonModule,
     MatIconModule,
+    UserDashboardModule,
   ],
 })
 export class MainWrapperModule {}
