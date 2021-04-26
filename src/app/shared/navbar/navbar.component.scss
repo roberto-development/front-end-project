@@ -4,6 +4,27 @@
   width: 100%;
 }
 
+.icon-menu {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    // margin-left: 100%;
+}
+
+.icon-dropdown-menu {
+  position: absolute;
+  top: 50%;
+  // right: 0;
+  transform: translateY(-50%);
+  margin-left: 20%;
+}
+
+.row {
+  height: inherit;
+  margin-left: 5%;
+}
+
 .navbar-brand {
   align-items: initial;
 }
@@ -17,9 +38,7 @@
   margin-bottom: 10px;
 }
 
-.d-flex {
+.example-form-field {
+  width: 200px;
 }
 
-.logout {
-  // margin-left: 150px;
-}

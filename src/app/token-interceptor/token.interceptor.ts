@@ -7,7 +7,8 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { SharedService } from '../services/shared.service';
 
 const TOKEN_HEADER_KEY = 'token';
@@ -21,11 +22,24 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private sharedServ: SharedService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
-    request = this.addAuthHeader(request);
-    console.log(JSON.stringify(request));
 
-    return next.handle(request);
+      request = this.addAuthHeader(request);
+      console.log(JSON.stringify(request));
+      // return next.handle(request).pipe(
+      //       catchError((err) => {
+      //         if (err.status == 401) {
+      //           console.log('From Interceptor, Unauthorized ');
+      //           this.router.navigate[('/login')];
+      //         }
+      //         const error = err.error.message || err.statusText;
+      //         console.log(err);
+      //         console.log('From Interceptor ' + err.error.message);
+      //         return throwError(err);
+      //       })
+      //     );
+      return next.handle(request);
   }
+
   addAuthHeader(request) {
     const bearer = localStorage.getItem('token');
     console.log(bearer);
@@ -39,20 +53,6 @@ export class TokenInterceptor implements HttpInterceptor {
     return request;
   }
 
-  // intercept(
-  //   request: HttpRequest<any>,
-  //   next: HttpHandler
-  // ): Observable<HttpEvent<any>> {
-  //   this.sharedServ.clearToken();
-  //   const bearer = localStorage.getItem('token');
-  //   if (bearer) {
-  //     request.clone({
-  //       setHeaders: {
-  //       // headers: request.headers.set(
-  //       //   TOKEN_HEADER_KEY,
-  //       //   'Bearer ' + this.tokenInterceptor
-  //       // ),
-  //       "Authentication": `Bearer ${this.tokenInterceptor}`,
   //       },
   //     });
   //   }

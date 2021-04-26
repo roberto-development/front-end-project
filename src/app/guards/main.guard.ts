@@ -28,14 +28,15 @@ export class MainGuard implements OnInit, CanActivate {
   ngOnInit() {}
 
   public isLogged(): boolean {
-    let token = localStorage.getItem('token');
+    // let token = localStorage.getItem('token');
 
-    if (token) {
-      return !this.jwtHelper.isTokenExpired(token);
-    } else {
-      this.router.navigate['/login'];
-      return false;
-    }
+    // if (token) {
+    //   return !this.jwtHelper.isTokenExpired(token);
+    // } else {
+    //   this.router.navigate['/login'];
+    //   return false;
+    // }
+    return true;
     // sfrutto per gestire l'avanzamento di canActivate
   }
 

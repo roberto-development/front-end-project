@@ -13,6 +13,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListItem, MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule, NgIf } from '@angular/common';
+import {MatMenuModule} from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { CommonModule, NgIf } from '@angular/common';
     MatIconModule,
     MatToolbarModule,
     CommonModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     NavbarComponent,
@@ -44,6 +50,9 @@ import { CommonModule, NgIf } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
 })
 export class SharedModule {}

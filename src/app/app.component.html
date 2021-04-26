@@ -1,1 +1,30 @@
-<router-outlet></router-outlet>
+<!-- <app-left-menu></app-left-menu> -->
+<mat-drawer-container class="example-container homeBackground" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+
+
+    <div class="sidebar-logo" style="margin-left: 35%; margin-top: 10%;">
+      <a href="https://www.grupposcai.it">
+        <img src="./assets/stock-images/scai-logo.png" />
+      </a>
+    </div>
+    <br><br><br><br>
+
+    <mat-nav-list class="prova">
+      <a mat-list-item [routerLink]="'/profile'"><mat-icon>face</mat-icon> Profile </a>
+      <a mat-list-item [routerLink]="'/dashboard'"><mat-icon>dashboard</mat-icon>  Dashboard </a>
+      <a mat-list-item [routerLink]="'/Friendship'"> <mat-icon>people</mat-icon> Friendships </a>
+      <a mat-list-item [routerLink]="'/chat'"><mat-icon>chat_bubble</mat-icon> Chat </a>
+      <a mat-list-item [routerLink]="'/home'"><mat-icon>home</mat-icon> Homepage </a>
+      <!-- <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item -->
+        <!-- >Close</a
+          > -->
+        </mat-nav-list>
+      </mat-drawer>
+      <div class="example-sidenav-content">
+        <router-outlet></router-outlet>
+      </div>
+
+
+</mat-drawer-container>
+

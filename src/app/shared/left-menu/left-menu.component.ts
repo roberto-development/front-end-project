@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-left-menu',
@@ -10,6 +10,8 @@ export class LeftMenuComponent implements OnInit {
   constructor() {}
   @ViewChild('sidenav') sidenav: MatSidenav;
   isExpanded = true;
+
+  opened: boolean;
   showSubmenu: boolean = false;
   isShowing = false;
   showSubSubMenu: boolean = false;

@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid offset-2">
+<!-- <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid offset-2"> -->
     <!-- <a
       class="navbar-brand offset-1 mr-3"
       href="https://www.grupposcai.it"
       >Scai</a
     > -->
-    <button
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -17,7 +17,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse row navbar-collapse" id="navbarSupportedContent">
-      <!--  -->
 
       <ul class="navbar-nav col-12 me-auto mb-2 mb-lg-0">
         <div class="row col-6">
@@ -70,4 +69,86 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> -->
+
+<mat-toolbar color="primary" class="example-toolbar">
+  <!-- (click)="isExpanded = !isExpanded"  -->
+
+  <button mat-icon-button mat-button (click)="toggleMenu()" style="margin-left: 1%;">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1 class="example-app-name" style="margin-left: 1%;">Networky</h1>
+  <!-- layout-align="space-between center" -->
+
+  <!-- <mat-form-field class="example-form-field">
+    <mat-label>Clearable input</mat-label>
+    <input matInput type="text" [(ngModel)]="value">
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field> -->
+<!--  class="row" -->
+  <div class="row">
+    <div class="col-8">
+
+        <form class="d-flex ml-auto">
+          <input
+          class="form-control"
+          type="search"
+          placeholder="Search"
+          style="margin: 10px"
+          aria-label="Search"
+          />
+          <button class="btn btn-success" type="submit" style="margin: 10px">
+            Search
+          </button>
+        </form>
+
+      </div>
+      <div class="col-4">
+
+
+        <button mat-icon-button [matMenuTriggerFor]="menuSettings" class="icon-menu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menuSettings="matMenu">
+          <button mat-menu-item>
+            <mat-icon>manage_accounts</mat-icon>
+            <span>Manage Account</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>change_circle</mat-icon>
+            <span>Change Password</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>report_gmailerrorred</mat-icon>
+            <span>Report abuse</span>
+          </button>
+        </mat-menu>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="icon-dropdown-menu">
+          <mat-icon>arrow_drop_down_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>contact_support</mat-icon>
+            <span>Contact Support</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+      <!-- <mat-sidenav-content>
+        <p><button mat-button >Toggle</button></p>
+    <p>
+    ciao
+  </p>
+</mat-sidenav-content> -->
+</mat-toolbar>

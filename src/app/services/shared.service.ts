@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountLogin } from '../models/Account.model';
 import { Post } from '../models/Post.model';
@@ -18,6 +18,10 @@ const CURRENT_USER: string = 'currentUser';
   providedIn: 'root',
 })
 export class SharedService {
+
+  subjectShared = new Subject<boolean>();
+  // inizializzato già a new
+
   // -----
   isLoggedIn: boolean = false;
 
@@ -44,6 +48,7 @@ export class SharedService {
       localStorage.setItem('token', token);
       this.token = token;
       console.log(this.token);
+
     } else {
       let getItem = localStorage.getItem('token');
       console.log(JSON.stringify(getItem));

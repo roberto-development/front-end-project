@@ -22,16 +22,32 @@
   background-repeat: no-repeat;
 }
 
-html,
-body {
-  height: 100%;
-  // }
-  // body {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+// html,
+// body {
+//   height: 100%;
+//   // }
+//   // body {
+//   font-family: Roboto, "Helvetica Neue", sans-serif;
+//   background-image: url("assets/stock-images/home-background.jpg");
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-blend-mode: darken;
+// }
+
+.homeBackground {
   background-image: url("assets/stock-images/home-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-blend-mode: darken;
+}
+
+mat-drawer-container {
+  height: 100%;
+}
+
+mat-drawer {
+  min-width: 20rem;
+  max-width: 30rem;
 }
 
 html,

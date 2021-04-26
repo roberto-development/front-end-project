@@ -6,7 +6,6 @@ import { FriendshipComponent } from './friendship/friendship.component';
 import { PostComponent } from './post/post.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
-import { PostCardComponent } from './post-card/post-card.component';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
@@ -14,7 +13,6 @@ import { MatCardModule } from '@angular/material/card';
     ProfileComponent,
     FriendshipComponent,
     PostComponent,
-    PostCardComponent,
   ],
 
   imports: [
