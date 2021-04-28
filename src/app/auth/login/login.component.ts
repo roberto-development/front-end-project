@@ -12,9 +12,9 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  isSubmitted = false;
-  userDTOprova: UserDTO;
-  isLoading = false;
+  // isSubmitted = false;
+  // userDTOprova: UserDTO;
+  // isLoading = false;
   formSignIn: FormGroup = new FormGroup({
     email: new FormControl(null, Validators.required),
     password: new FormControl(''),
@@ -29,30 +29,27 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.sharedServ.isLogged()) {
-      this.isSubmitted = true;
-      this.router.navigate(['/profile']);
-      // this.authServ.loggedInUser;
-    }
+    // if (this.sharedServ.isLogged()) {
+    //   this.isSubmitted = true;
+    //   this.router.navigate(['/profile']);
+    //   // this.authServ.loggedInUser;
+    // }
   }
 
   async onSubmit() {
     let loginAccount = new AccountLogin();
     loginAccount.email = this.formSignIn.get('email').value;
     loginAccount.password = this.formSignIn.get('password').value;
-    try {
       const value = await this.authenticationService.login(loginAccount);
-      localStorage.setItem('token', value.token);
-      this.sharedServ.setToken(value.token);
+      if (value != null) {
 
-      this.router.navigate(['/profile']);
-      this.isLoading = false;
-    } catch (error) {
-      error.message;
-      console.log('An error occured!' + error);
-      this.errore = true;
-      this.isLoading = false;
-    }
+        localStorage.setItem('token', value.token);
+
+        this.router.navigate(['/profile']);
+        // this.isLoading = false;
+      } else {
+        console.log('utente non trovato');
+      }
   }
 
   reloadPage(): void {

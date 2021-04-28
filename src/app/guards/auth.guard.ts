@@ -29,16 +29,16 @@ export class AuthGuard implements OnInit, CanActivate {
     console.log('Auth Guard activated!');
   }
 
-  public isLogged(): boolean {
-    let token = localStorage.getItem('token');
+  // public isLogged(): boolean {
+  //   let token = localStorage.getItem('token');
 
-    if (token) {
-      return !this.jwtHelper.isTokenExpired(token);
-    } else {
-      return this.router.navigate['/login'];
-    }
-    // sfrutto per gestire l'avanzamento di canActivate
-  }
+  //   if (token) {
+  //     return this.router.navigate['/login'];
+  //   } else {
+  //     return !this.jwtHelper.isTokenExpired(token);
+  //   }
+  //   // sfrutto per gestire l'avanzamento di canActivate
+  // }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -48,12 +48,12 @@ export class AuthGuard implements OnInit, CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    const token = this.sharedServ.getToken;
+    const token = localStorage.getItem('token');
     if (token) {
       this.router.navigate(['/profile']);
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 }

@@ -10,9 +10,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'auth', component: AuthenticationComponent },
-  // { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
-  // { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'login', component: LoginComponent },
 ];
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountLogin } from '../models/Account.model';
@@ -36,7 +37,8 @@ export class SharedService {
 
   constructor(
     private authService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private jwtHelper: JwtHelperService
   ) {}
 
   updateUser(user: User) {
@@ -59,8 +61,14 @@ export class SharedService {
     return this.authService.uploadPhoto(profilePicture);
   }
 
-  public getToken(): string {
-    return localStorage.getItem('token');
+  public getToken(): boolean {
+    const tok = localStorage.getItem('token');
+    if (this.jwtHelper.isTokenExpired(tok)) {
+      return true;
+        // this.router.navigate(['/login']);
+      }
+      return false;
+    // return localStorage.getItem('token');
   }
 
   clearToken() {

@@ -1,15 +1,21 @@
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
+  HttpResponse,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
+import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import { SharedService } from '../services/shared.service';
+import { UserService } from '../services/user.service';
 
 const TOKEN_HEADER_KEY = 'token';
 
@@ -19,34 +25,69 @@ const TOKEN_HEADER_KEY = 'token';
 export class TokenInterceptor implements HttpInterceptor {
   // private isRefreshing = false;
   tokenInterceptor: string;
-  constructor(private sharedServ: SharedService, private router: Router) {}
+
+  constructor(
+    private sharedServ: SharedService,
+    private router: Router,
+    private userService: UserService
+    ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
-
+    let ok: string;
       request = this.addAuthHeader(request);
-      console.log(JSON.stringify(request));
-      // return next.handle(request).pipe(
-      //       catchError((err) => {
-      //         if (err.status == 401) {
-      //           console.log('From Interceptor, Unauthorized ');
-      //           this.router.navigate[('/login')];
-      //         }
-      //         const error = err.error.message || err.statusText;
-      //         console.log(err);
-      //         console.log('From Interceptor ' + err.error.message);
-      //         return throwError(err);
-      //       })
-      //     );
-      return next.handle(request);
+      return next.handle(request)
+      .pipe(
+        tap(() => {},
+      (err: any) => {
+        console.log(err);
+      if (err instanceof HttpErrorResponse) {
+        console.log(err.status);
+        if (err.status === 401) {
+          localStorage.removeItem('token')
+          this.router.navigate(['/login'])
+        }
+      }
+    }
+      ));
+
+          //     (err: any) => {
+          //   console.log(err);
+          // // }))
+          // if (err instanceof HttpErrorResponse) {
+          // //   // console.log('dentro err inst');
+
+          //     if (err.status === 401) {
+
+          //       this.userService.logout();
+          //     }
+          //     const error = err.error.message || err.statusText;
+          //     return throwError(err);
+          //   }}
+
+          // );
+
+          // return next.handle(request);
+
+    //   return next.handle(request).pipe( tap(() => {},
+    //   (err: any) => {
+    //   if (err instanceof HttpErrorResponse) {
+    //     if (err.status === 401) {
+      //     this.router.navigate(['login']);
+    //      return;
+    //     }
+    //   }
+    // }));
+  // };
   }
 
+
   addAuthHeader(request) {
-    const bearer = localStorage.getItem('token');
-    console.log(bearer);
-    if (bearer != null) {
+    const token = localStorage.getItem('token');
+    // console.log(bearer);
+    if (token != null) {
       return request.clone({
         setHeaders: {
-          Authentication: 'Bearer ' + bearer,
+          Authentication: `Bearer ${token}`,
         },
       });
     }

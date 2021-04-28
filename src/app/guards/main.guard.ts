@@ -48,10 +48,12 @@ export class MainGuard implements OnInit, CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    const token = this.sharedService.getToken();
+    const token = localStorage.getItem('token');
 
     // se loggato return true altrimenti false e torna alla login
     if (token) {
+
+      // this.router.navigate(['/profile'])
       return true;
     } else {
       this.router.navigate(['/login']);
