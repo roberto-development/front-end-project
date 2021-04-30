@@ -40,17 +40,18 @@ export class LoginComponent implements OnInit {
     let loginAccount = new AccountLogin();
     loginAccount.email = this.formSignIn.get('email').value;
     loginAccount.password = this.formSignIn.get('password').value;
+    try {
       const value = await this.authenticationService.login(loginAccount);
-      if (value != null) {
-
+      console.log(value);
+      if (value) {
         localStorage.setItem('token', value.token);
-
         this.router.navigate(['/profile']);
-        // this.isLoading = false;
-      } else {
-        console.log('utente non trovato');
       }
+    } catch {
+      console.log('utente non trovato');
+    }
   }
+  // observable => eventi continui (cambiamenti su reactive form es.)
 
   reloadPage(): void {
     window.location.reload();

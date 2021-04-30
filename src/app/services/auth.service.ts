@@ -39,28 +39,11 @@ export class AuthenticationService {
 
   public login(account: AccountLogin) {
     console.log(account);
-    return new Promise<TokenDTO>((resolve, reject) => {
-      this.http
-        .post<TokenDTO>(environment.rootUrl + `/login`, account)
-        .subscribe(
-          (result) => {
-            console.log('dentro metodo login ' + result.token);
-            // localStorage.setItem('token', result);
-            resolve(result);
-          },
-          (error) => {
-            reject(error);
-            // in caso di errore rigetta il messaggio
-          }
-        );
-    });
+    return this.http
+        .post<TokenDTO>(environment.rootUrl + `/login`, account).toPromise();
 
-    // return this.http.post<TokenDTO>(environment.rootUrl + `/getUser`, account);
   }
 
-  // public login(account: Account): Observable<User> {
-  //   return this.http.post<User>(environment.rootUrl + `/getUser`, account);
-  // }
 
   public createAccount(account: Account): Observable<User> {
     return this.http.post<User>(environment.rootUrl + `/register`, account);

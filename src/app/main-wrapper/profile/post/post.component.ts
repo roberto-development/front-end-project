@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
-  userPost: Post[] = [];
+  post: Post[] = [];
   categoriaPost: string;
   constructor(private userService: UserService) {}
 
@@ -21,7 +21,7 @@ export class PostComponent implements OnInit {
   getUserPost() {
     this.userService.getPost().subscribe((result: Post[]) => {
       console.log(result);
-      this.userPost = result;
+      this.post = result;
     });
   }
 }

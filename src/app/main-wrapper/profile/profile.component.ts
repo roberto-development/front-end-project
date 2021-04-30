@@ -37,9 +37,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getAndSetUserInfo();
-    // this.user = this.sharedServ.loggedInUser;
 
-    this.prova();
+    this.getProfilePic();
 
     // const { id } = this.user;
     console.log(this.sharedServ.loggedInUser);
@@ -71,13 +70,11 @@ export class ProfileComponent implements OnInit {
     };
     if (selectedImage) {
       reader.readAsDataURL(selectedImage);
-      //
     }
   }
 
   onUpload() {
     const payload: Image = {
-      // id: this.,
       id: this.idImage,
       usersId: this.selectedFile.usersId,
       img: this.imageBase64,
@@ -86,16 +83,15 @@ export class ProfileComponent implements OnInit {
       this.sharedServ.uploadPhoto(payload).toPromise();
       this.user.image = this.imageBase64;
     } catch {
-      console.error('diofa');
+      console.error('errore on upload');
     }
   }
 
-  async prova() {
+  async getProfilePic() {
     console.log(this.user);
 
     const res = await this.sharedServ.getProfilePic().toPromise();
 
-    // console.log('img profile: ' + res);
     this.user.image = res;
     const transformed = this.transform();
     return transformed;

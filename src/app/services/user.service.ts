@@ -31,6 +31,10 @@ export class UserService {
     return this.http.get<any>(environment.rootUrl + '/getPosts');
   }
 
+  getExcel() {
+  return this.http.get<any>(environment.rootUrl + '/users/export/excel')
+  }
+
   getCategoria(id): Observable<CategoriaPost> {
     return this.http.post<CategoriaPost>(
       environment.rootUrl + '/getCategoria',

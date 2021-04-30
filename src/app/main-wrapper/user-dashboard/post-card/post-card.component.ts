@@ -51,6 +51,7 @@ export class PostCardComponent implements OnInit {
     });
   }
 
+
   // getPostImage() {
   //   return this.userPost.
   // }

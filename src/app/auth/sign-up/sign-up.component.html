@@ -1,14 +1,15 @@
+<!--  elementi dentro box sono rientrati a sx -->
+
 <div class="customWidthHeight customBackground">
   <div class="customPosition customWidthHeight container">
-    <!-- <app-authentication></app-authentication> -->
-    <!-- <div class="customPosition customWidthHeight"> -->
-    <!-- <div class="hero"> -->
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
-      <div class="loginbox">
+      <div class="loginbox row mb-3">
         <img src="./assets/stock-images/gruppo-scai.png" class="avatar" />
         <br />
-        <div class="customPosition hero">
-          <h1 class="h3 mb-4 fw-normal">Please sign up</h1>
+        <div class="customPosition hero" style="align-items: center;">
+          <div>
+            <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+          </div>
           <div class="row mb-3">
             <a class="text-white-50 col-sm-10" routerLink="/login">
               Already registered? Sign in!
@@ -19,10 +20,8 @@
             <label class="form-label">Email address</label>
             <input
               type="email"
+              formControlName="email"
               class="form-control"
-              name="email"
-              #email="ngModel"
-              ngModel
               required
               email
             />
@@ -34,9 +33,7 @@
             <input
               type="password"
               class="form-control"
-              name="password"
-              #password="ngModel"
-              ngModel
+              formControlName="password"
               required
               password
             />
@@ -48,8 +45,7 @@
               type="text"
               class="form-control"
               name="nome"
-              #nome="ngModel"
-              ngModel
+              formControlName="nome"
               required
             />
           </div>
@@ -59,9 +55,7 @@
             <input
               type="text"
               class="form-control"
-              name="cognome"
-              #cognome="ngModel"
-              ngModel
+              formControlName="cognome"
               required
             />
           </div>
@@ -72,15 +66,14 @@
               type="date"
               class="form-control"
               name="ddn"
-              #ddn="ngModel"
-              ngModel
+              formControlName="ddn"
               required
             />
           </div>
           <br />
           <div class="mb-3">
             <label for="country">Country:</label><br />
-            <select name="country" #country="ngModel" ngModel required>
+            <select name="country" formControlName="country" required>
               <option value="Italy">Italy</option>
               <option value="France">France</option>
               <option value="Germany">Germany</option>

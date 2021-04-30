@@ -1,9 +1,12 @@
 <div class="container-fluid offset-1">
   <h2 class="dashboard mb-5 mt-4">User Dashboard page</h2>
-  <div class="buttons">
-    <button mat-icon-button style="background-color: white;">
-      <mat-icon>loupe</mat-icon>
+  <div class="buttons" >
+    <button mat-icon-button style="background-color: white;" type="submit" (click)="getExcel()">
+      <a th:href="/@{/users/export/excel}">Export to Excel</a>
     </button>
+
+<!-- <mat-icon>loupe</mat-icon> -->
+
     <!-- [matMenuTriggerFor]="menu"
       <mat-menu #menu="matMenu">
       <button mat-menu-item>

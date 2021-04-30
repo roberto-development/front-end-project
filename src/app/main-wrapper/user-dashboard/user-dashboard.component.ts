@@ -22,4 +22,7 @@ export class UserDashboardComponent implements OnInit {
       this.userPost = result;
     });
   }
+  getExcel() {
+    this.userService.getExcel()._subscribe(());
+  }
 }

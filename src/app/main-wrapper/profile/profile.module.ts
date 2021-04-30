@@ -7,6 +7,8 @@ import { PostComponent } from './post/post.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { MatCardModule } from '@angular/material/card';
+import { UserDashboardComponent } from '../user-dashboard/user-dashboard.component';
+import { UserDashboardModule } from '../user-dashboard/user-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
     SharedModule,
     FormsModule,
     MatCardModule,
+    UserDashboardModule
   ],
 })
 export class ProfileWrapperModule {}

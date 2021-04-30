@@ -19,6 +19,10 @@ export class SignUpComponent implements OnInit {
   formRegister: FormGroup = new FormGroup({
     email: new FormControl(null, Validators.required),
     password: new FormControl(''),
+    nome: new FormControl(''),
+    cognome: new FormControl(''),
+    ddn: new FormControl(''),
+    country: new FormControl('')
   });
 
   selectedFile: File;
@@ -46,26 +50,12 @@ export class SignUpComponent implements OnInit {
     this.authService.createAccount(signUpAccount).subscribe(
       (result: UserDTO) => {
         console.log(result);
-        // this.authService.loggedInUser = result;
-        //  localStorage.setItem('account', JSON.stringify(result));
-        //  localStorage.setItem('user', JSON.stringify(newAccount.user))
         this.router.navigate(['/login']);
       },
       (error) => {
         console.log(error);
         this.errore = true;
       }
-
-      // onFileChanged(event) {
-      //   this.selectedFile = event.target.files[0];
-      // }
-
-      // onUpload() {
-      // let uploadData = new FormData();
-      // uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-
-      // this.authService.uploadPhoto(this.selectedFile);
-      // }
     );
   }
 }
