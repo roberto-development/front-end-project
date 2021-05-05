@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AccountLogin } from '../models/Account.model';
 import { Post } from '../models/Post.model';
 import { CategoriaPost } from '../models/CategoriaPost.model';
+import { ExcelDTO } from '../models/ExcelDTO.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,38 @@ export class UserService {
   }
 
   getExcel() {
-  return this.http.get<any>(environment.rootUrl + '/users/export/excel')
+  return this.http.get<any>(environment.rootUrl + '/users/export/excel', { responseType: 'arraybuffer' as 'json' });
+  }
+
+  getCSV() {
+    return this.http.get<any>(environment.rootUrl + '/users/export/csv').toPromise();
+  }
+
+  getExcelFile() {
+    return this.http.get<any>(environment.rootUrl + '/exportExcel', {responseType:'arraybuffer' as 'json'}
+     ).subscribe(response => this.downLoadFile(response, "application/vnd.ms-excel"));
+    }
+
+
+/**
+ * Method is use to download file.
+ * @param data - Array Buffer data
+ * @param type - type of the document.
+ */
+downLoadFile(data: any, type: string) {
+  console.log(data);
+
+    let blob = new Blob([data], { type: type});
+    let url = window.URL.createObjectURL(blob);
+    let pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
+        alert( 'Please disable your Pop-up blocker and try again.');
+    }
+}
+
+
+  getResponseEntityExcelDTO() {
+    return this.http.get<ExcelDTO>(environment.rootUrl + '/excel').toPromise();
   }
 
   getCategoria(id): Observable<CategoriaPost> {
@@ -42,3 +74,7 @@ export class UserService {
     );
   }
 }
+function downLoadFile(data: any, any: any, type: any, string: any) {
+  throw new Error('Function not implemented.');
+}
+

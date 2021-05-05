@@ -1,9 +1,21 @@
 <div class="container-fluid offset-1">
   <h2 class="dashboard mb-5 mt-4">User Dashboard page</h2>
-  <div class="buttons" >
-    <button mat-icon-button style="background-color: white;" type="submit" (click)="getExcel()">
-      <a th:href="/@{/users/export/excel}">Export to Excel</a>
-    </button>
+  <div class="buttons">
+    <!-- (click)="getExcelRespEntity()" -->
+    <!-- <button *ngIf="excelDTO" mat-icon-button style="background-color: white;" type="submit" > -->
+      <button mat-icon-button style="background-color: white;" type="submit" (click)="initDownloadCSV()">Download</button>
+    <!-- <a mat-button [href]="('data:application/vnd.ms-excel;base64,' + excelFile.excelBase64) | safe:'url'" download="excel.xlsx" *ngIf="excelFile"> -->
+        <!-- Download</a> -->
+
+        <!-- <a mat-button [href]="('data:application/csv;base64,' + excelFile.excelBase64) | safe:'url'" download="excel.csv">Download</a> -->
+
+    <!-- </button> -->
+  <!-- </div> -->
+  <div>
+
+    <!-- <button mat-icon-button style="background-color: white;" type="submit" (click)="getExcel()">
+        <a th:href="localhost:8080/api/@{/users/export}">Export to Csv</a>
+    </button> -->
 
 <!-- <mat-icon>loupe</mat-icon> -->
 
@@ -122,4 +134,4 @@
       </div> -->
     </div>
   </div>
-</div>
+<!-- </div> -->

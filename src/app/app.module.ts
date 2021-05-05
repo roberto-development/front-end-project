@@ -1,21 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-// import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
 import { AuthModule } from './auth/auth.module';
-import { TokenInterceptor } from './token-interceptor/token.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './shared/shared.module';
-import { MainWrapperModule } from './main-wrapper/main-wrapper.module';
 import { WrapperComponent } from './main-wrapper/main-wrapper.component';
-import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { MainWrapperModule } from './main-wrapper/main-wrapper.module';
+import { SharedModule } from './shared/modules/shared.module';
+import { TokenInterceptor } from './token-interceptor/token.interceptor';
+
+
+
 @NgModule({
   declarations: [AppComponent, WrapperComponent],
   imports: [
@@ -27,8 +25,6 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     BrowserAnimationsModule,
     SharedModule,
     MainWrapperModule,
-
-    // MDBBootstrapModule.forRoot(),
   ],
   providers: [
     {
@@ -38,6 +34,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
+
   ],
   bootstrap: [AppComponent],
 })
