@@ -24,6 +24,7 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getUserPost();
+    // this.initDownloadPdf();
     // this.initDownload();
     // this.initDownloadCSV();
   }
@@ -45,6 +46,12 @@ export class UserDashboardComponent implements OnInit {
   async initDownloadCSV() {
     const file = await this.userService.getExcelFile();
     console.log(file);
+  }
+
+  async initDownloadPdf() {
+    const filePdf = await this.userService.getPdfFile();
+    console.log(filePdf);
+
   }
 
 

@@ -40,6 +40,11 @@ export class UserService {
     return this.http.get<any>(environment.rootUrl + '/users/export/csv').toPromise();
   }
 
+  getPdfFile() {
+    return this.http.get<any>(environment.rootUrl + '/users/export/pdf', {responseType:'arraybuffer' as 'json'}
+    ).subscribe(response => this.downLoadFile(response, "application/pdf"));
+  }
+
   getExcelFile() {
     return this.http.get<any>(environment.rootUrl + '/exportExcel', {responseType:'arraybuffer' as 'json'}
      ).subscribe(response => this.downLoadFile(response, "application/vnd.ms-excel"));
